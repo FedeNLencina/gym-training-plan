@@ -1,0 +1,54 @@
+/* ==========================================================================
+   ATLAS GYM THEME - TOKENS OFICIALES (NEGRO PURO, BLANCO & ROJO PURO)
+   ========================================================================== */
+
+:root {
+  /* ⬛ Fondos (Dark Mode Profundo) */
+  --bg-main: #000000;
+  --bg-surface: #0e1217;
+  --bg-surface-elevated: #161b22;
+  --bg-surface-card: rgba(14, 18, 23, 0.88);
+  --bg-glass: rgba(14, 18, 23, 0.65);
+  --bg-glass-strong: rgba(8, 10, 14, 0.9);
+
+  /* 🔴 Acentos de Marca (Rojo Carmesí Puro Atlas) */
+  --primary: #ef1818;
+  --primary-hover: #dc2626;
+  --primary-vibrant: #fb2c36;
+  --primary-deep: #460809;
+  --primary-glow: rgba(239, 24, 24, 0.25);
+  --primary-glow-strong: rgba(239, 24, 24, 0.45);
+  --accent-green: #10b981;
+
+  /* ⚪ Tipografía y Textos */
+  --font-display: 'Outfit', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+  
+  --text-main: #ffffff;
+  --text-muted: #9ca3af;
+  --text-dimmed: #6b7280;
+  --text-accent: #ef1818;
+
+  /* 🪟 Bordes */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-white-faint: rgba(255, 255, 255, 0.04);
+  --border-accent: rgba(239, 24, 24, 0.35);
+  --border-accent-hover: rgba(251, 44, 54, 0.7);
+
+  /* ✨ Sombras con Resplandor Rojo Puro */
+  --shadow-glow: 0 0 30px rgba(239, 24, 24, 0.25);
+  --shadow-glow-lg: 0 0 50px rgba(239, 24, 24, 0.4);
+  --shadow-card: 0 20px 25px -5px rgba(0, 0, 0, 0.7), 0 8px 10px -6px rgba(0, 0, 0, 0.7);
+
+  /* 📐 Radios de Borde */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 9999px;
+
+  /* 🔄 Transiciones */
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
