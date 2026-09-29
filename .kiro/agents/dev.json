@@ -1,0 +1,166 @@
+{
+  "name": "dev",
+  "description": "Agente de desarrollo TDD para GymTrainingPlan. Puede explorar, crear componentes/tests/servicios y correr la suite de Vitest sin pedir permiso, pero tiene vedadas las operaciones destructivas y las que tocan credenciales, historial de git o dependencias.",
+  "tools": ["read", "write", "shell", "web", "subagent", "context", "todo_list"],
+  "resources": [
+    "file://.kiro/steering/tdd.md",
+    "file://package.json",
+    "file://vite.config.js"
+  ],
+  "permissions": {
+    "rules": [
+      {
+        "capability": "fs_read",
+        "match": ["./**"],
+        "effect": "allow"
+      },
+      {
+        "capability": "fs_read",
+        "match": [
+          "**/.env",
+          "**/.env.*",
+          "**/*.pem",
+          "**/*.key",
+          "**/id_rsa*",
+          "secrets/**",
+          "**/.npmrc",
+          "**/.aws/**"
+        ],
+        "effect": "deny"
+      },
+      {
+        "capability": "fs_write",
+        "match": [
+          "src/**",
+          "tests/**",
+          "test/**",
+          "__tests__/**",
+          "apuntes/**",
+          "index.html",
+          "vite.config.js",
+          "vitest.config.{js,ts}",
+          "vitest.setup.{js,ts}",
+          "tsconfig*.json"
+        ],
+        "effect": "allow"
+      },
+      {
+        "capability": "fs_write",
+        "match": [
+          "**/.env",
+          "**/.env.*",
+          "**/*.pem",
+          "**/*.key",
+          "secrets/**",
+          "node_modules/**",
+          "dist/**",
+          "package-lock.json",
+          "**/.npmrc",
+          "**/.github/workflows/**"
+        ],
+        "effect": "deny"
+      },
+      {
+        "capability": "shell",
+        "match": [
+          "ls",
+          "ls *",
+          "pwd",
+          "cd *",
+          "mkdir *",
+          "touch *",
+          "cat *",
+          "head *",
+          "tail *",
+          "wc *",
+          "which *",
+          "echo *",
+          "find *",
+          "grep *",
+          "rg *",
+          "node --version",
+          "npm --version"
+        ],
+        "effect": "allow"
+      },
+      {
+        "capability": "shell",
+        "match": [
+          "npm test",
+          "npm test *",
+          "npm run test",
+          "npm run test *",
+          "npm run build",
+          "npm run build *",
+          "npx vitest run*",
+          "npx tsc --noEmit*",
+          "npx vite build*"
+        ],
+        "effect": "allow"
+      },
+      {
+        "capability": "shell",
+        "match": [
+          "git status*",
+          "git diff*",
+          "git log*",
+          "git show*",
+          "git branch",
+          "git branch --list*",
+          "git stash list*"
+        ],
+        "effect": "allow"
+      },
+      {
+        "capability": "shell",
+        "match": [
+          "npm run dev*",
+          "npm run test:watch*",
+          "npm run preview*",
+          "npx vitest",
+          "npx vitest --watch*",
+          "npx vite",
+          "npx vite dev*"
+        ],
+        "effect": "deny"
+      },
+      {
+        "capability": "shell",
+        "match": [
+          "rm *",
+          "rmdir *",
+          "del *",
+          "sudo *",
+          "chmod *",
+          "chown *",
+          "mv *",
+          "npm install*",
+          "npm i *",
+          "npm ci*",
+          "npm uninstall*",
+          "npm publish*",
+          "npm update*",
+          "npx --yes*",
+          "git push*",
+          "git commit*",
+          "git reset*",
+          "git checkout*",
+          "git clean*",
+          "git rebase*",
+          "git merge*",
+          "git stash drop*",
+          "gh *",
+          "curl *",
+          "wget *",
+          "ssh *",
+          "scp *",
+          "docker *",
+          "kubectl *",
+          "*psql*",
+          "*mysql*"
+        ],
+        "effect": "deny"
+      }
+    ]
+  }
+}

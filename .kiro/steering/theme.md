@@ -1,15 +1,23 @@
-/* ==========================================================================
-   ATLAS GYM THEME - TOKENS OFICIALES (NEGRO PURO, BLANCO & ROJO PURO)
-   ========================================================================== */
+---
+inclusion: always
+---
 
+# Sistema de Diseño y Paleta de Colores (Atlas Gym Theme Oficial)
+
+Esta regla define los estándares visuales oficiales para `GymTrainingPlan`, basados estrictamente en la identidad visual de Atlas Gym: **Negro Puro (`#000000`), Blanco (`#FFFFFF`) y Rojo Carmesí Puro (`#EF1818` / `#E40014`)**. No se utiliza naranja.
+
+---
+
+## 1. Tokens de Diseño y Variables CSS (`:root`)
+
+```css
 :root {
   /* ⬛ Fondos (Dark Mode Profundo) */
   --bg-main: #000000;
   --bg-surface: #0e1217;
   --bg-surface-elevated: #161b22;
-  --bg-surface-card: rgba(14, 18, 23, 0.88);
-  --bg-glass: rgba(14, 18, 23, 0.65);
-  --bg-glass-strong: rgba(8, 10, 14, 0.9);
+  --bg-surface-card: rgba(14, 18, 23, 0.9);
+  --bg-glass: rgba(14, 18, 23, 0.7);
 
   /* 🔴 Acentos de Marca (Rojo Carmesí Puro Atlas) */
   --primary: #ef1818;
@@ -18,12 +26,8 @@
   --primary-deep: #460809;
   --primary-glow: rgba(239, 24, 24, 0.25);
   --primary-glow-strong: rgba(239, 24, 24, 0.45);
-  --accent-green: #10b981;
 
   /* ⚪ Tipografía y Textos */
-  --font-display: 'Outfit', sans-serif;
-  --font-body: 'Plus Jakarta Sans', sans-serif;
-  
   --text-main: #ffffff;
   --text-muted: #9ca3af;
   --text-dimmed: #6b7280;
@@ -35,20 +39,16 @@
   --border-accent: rgba(239, 24, 24, 0.35);
   --border-accent-hover: rgba(251, 44, 54, 0.7);
 
-  /* ✨ Sombras con Resplandor Rojo Puro */
+  /* ✨ Sombras con Resplandor Rojo */
   --shadow-glow: 0 0 30px rgba(239, 24, 24, 0.25);
   --shadow-glow-lg: 0 0 50px rgba(239, 24, 24, 0.4);
   --shadow-card: 0 20px 25px -5px rgba(0, 0, 0, 0.7), 0 8px 10px -6px rgba(0, 0, 0, 0.7);
-
-  /* 📐 Radios de Borde */
-  --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 20px;
-  --radius-xl: 28px;
-  --radius-full: 9999px;
-
-  /* 🔄 Transiciones */
-  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-smooth: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
+```
+
+---
+
+## 2. Pautas Visuales
+* **Botones**: Color rojo sólido `#EF1818` o gradiente sutil de rojo a rojo intenso `linear-gradient(135deg, #EF1818 0%, #B91C1C 100%)`.
+* **Títulos con Acento**: Texto en rojo puro `#EF1818` o gradiente blanco a rojo `linear-gradient(135deg, #FFFFFF 20%, #EF1818 100%)`.
+* **Prohibido**: No usar tonos naranjas, amarillos o cobrizos.
