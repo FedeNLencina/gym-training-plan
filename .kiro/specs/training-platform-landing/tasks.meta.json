@@ -43,6 +43,18 @@
         "chatSessionId": "sess_65b13df5-135c-4ba3-9845-13e37185ccee",
         "timestamp": 1790695828408
       }
+    ],
+    "2.1 Definir modelos y jerarquía de errores de dominio": [
+      {
+        "executionId": "2f2381b1-e175-4d05-ae90-bf29d40bf4f6",
+        "chatSessionId": "sess_1c563363-b676-474b-96c3-f35e29f790c9",
+        "timestamp": 1790705341804
+      },
+      {
+        "executionId": "2f2381b1-e175-4d05-ae90-bf29d40bf4f6",
+        "chatSessionId": "sess_1c563363-b676-474b-96c3-f35e29f790c9",
+        "timestamp": 1790705540674
+      }
     ]
   }
 }

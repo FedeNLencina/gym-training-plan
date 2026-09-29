@@ -41,7 +41,7 @@ Convenciones obligatorias en todas las tareas de prueba:
     - _Requirements: 10.8_
 
 - [ ] 2. Dominio puro
-  - [ ] 2.1 Definir modelos y jerarquía de errores de dominio
+  - [x] 2.1 Definir modelos y jerarquía de errores de dominio
     - Crear `src/dominio/modelos.ts` con los tipos de `Entrenamiento`, `Ejercicio`, `Plan`, `Cuenta`, `Sesion`, constructores y constantes (`NIVELES`, `FUENTES_VIDEO`, `PERIODICIDADES`, `LIMITE_VIDEO_BYTES = 52428800`), tomando como punto de partida `src/tests/tiposDominio.ts`, que se creó provisionalmente en la tarea 1.3 y debe quedar reexportando desde acá, no duplicando
     - Crear `src/dominio/errores.ts` con `ErrorValidacion` (campo `campos`), `ErrorCorreoRegistrado`, `ErrorCredenciales`, `ErrorAlmacenamiento`, `ErrorEspacioInsuficiente`, `ErrorVideoAusente`, `ErrorCarga`
     - _Requirements: 8.7, 8.14_
