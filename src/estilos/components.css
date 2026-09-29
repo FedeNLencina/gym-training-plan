@@ -1,0 +1,311 @@
+/**
+ * Clases semánticas reutilizables.
+ *
+ * Todas consumen exclusivamente `var(--token)` de `variables.css`:
+ * ningún valor de color literal se declara en este archivo (Requirement 9.1).
+ * Mobile-first: una columna por defecto, grillas a partir de 768 px (9.4, 9.5).
+ */
+
+/* ---------- Secciones ---------- */
+
+.seccion {
+  padding-block: var(--espacio-xl);
+  background-color: var(--bg-main);
+}
+
+.seccion--superficie {
+  background-color: var(--bg-surface);
+}
+
+.seccion__encabezado {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-sm);
+  margin-bottom: var(--espacio-lg);
+}
+
+.seccion__bajada {
+  color: var(--text-muted);
+  max-width: 60ch;
+}
+
+@media (min-width: 768px) {
+  .seccion {
+    padding-block: var(--espacio-2xl);
+  }
+}
+
+/* ---------- Botones ---------- */
+
+.boton-primario,
+.boton-secundario {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espacio-sm);
+  min-height: var(--area-activa-min);
+  padding: var(--espacio-sm) var(--espacio-lg);
+  border-radius: var(--radio-sm);
+  /* ≥ 18 px permite texto sobre --primary con contraste 3:1 (9.3) */
+  font-size: 1.125rem;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
+}
+
+.boton-primario {
+  background-color: var(--primary);
+  color: var(--text-main);
+  border: 1px solid var(--border-accent);
+}
+
+.boton-primario:hover {
+  background-color: var(--primary-hover);
+  box-shadow: var(--shadow-glow);
+}
+
+.boton-secundario {
+  background-color: transparent;
+  color: var(--text-main);
+  border: 1px solid var(--border-subtle);
+}
+
+.boton-secundario:hover {
+  border-color: var(--border-accent-hover);
+  color: var(--text-accent);
+}
+
+.boton-primario[disabled],
+.boton-secundario[disabled] {
+  color: var(--text-dimmed);
+  border-color: var(--border-white-faint);
+  background-color: var(--bg-surface-elevated);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* ---------- Tarjetas ---------- */
+
+.tarjeta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-sm);
+  padding: var(--espacio-lg);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radio-md);
+  background-color: var(--bg-surface-card);
+  box-shadow: var(--shadow-card);
+}
+
+.tarjeta--destacada {
+  border-color: var(--border-accent);
+  box-shadow: var(--shadow-glow-lg);
+}
+
+.tarjeta__titulo {
+  color: var(--text-main);
+}
+
+.tarjeta__texto {
+  color: var(--text-muted);
+}
+
+.tarjeta__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacio-sm);
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+/* ---------- Grillas ---------- */
+
+.grilla {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--espacio-md);
+}
+
+@media (min-width: 768px) {
+  .grilla--dos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grilla--tres {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .grilla--cuatro {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .grilla--cuatro {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* ---------- Etiquetas de acento ---------- */
+
+.etiqueta-acento {
+  /* Texto pequeño de acento sobre fondo oscuro, nunca sobre --primary (9.2) */
+  display: inline-flex;
+  align-items: center;
+  padding: var(--espacio-xs) var(--espacio-sm);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radio-sm);
+  background-color: var(--primary-deep);
+  color: var(--text-accent);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.titulo-acento {
+  color: var(--text-accent);
+}
+
+/* ---------- Formularios ---------- */
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-xs);
+  margin-bottom: var(--espacio-md);
+}
+
+.campo__etiqueta {
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+.campo__control {
+  min-height: var(--area-activa-min);
+  padding: var(--espacio-sm);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radio-sm);
+  background-color: var(--bg-surface-elevated);
+  color: var(--text-main);
+}
+
+.campo__control:hover {
+  border-color: var(--border-accent);
+}
+
+.campo__error {
+  /* Texto pequeño: --text-accent sobre fondo oscuro (9.2) */
+  color: var(--text-accent);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+/* ---------- Mensajes y estados ---------- */
+
+.mensaje {
+  padding: var(--espacio-md);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radio-sm);
+  background-color: var(--bg-surface);
+  color: var(--text-muted);
+}
+
+.mensaje--error {
+  border-color: var(--border-accent);
+  color: var(--text-main);
+}
+
+/* ---------- Barra de progreso ---------- */
+
+.barra-progreso {
+  width: 100%;
+  height: 0.5rem;
+  border-radius: var(--radio-sm);
+  background-color: var(--bg-surface-elevated);
+  overflow: hidden;
+}
+
+.barra-progreso__relleno {
+  height: 100%;
+  background-color: var(--primary);
+}
+
+/* ---------- Navegación ---------- */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 1px solid var(--border-subtle);
+  background-color: var(--bg-glass);
+  backdrop-filter: blur(8px);
+}
+
+.navbar__contenido {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-md);
+  min-height: 64px;
+}
+
+.navbar__enlaces {
+  display: none;
+}
+
+.navbar__enlace {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--area-activa-min);
+  padding-inline: var(--espacio-sm);
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.navbar__enlace:hover {
+  color: var(--text-main);
+}
+
+.navbar__enlace[aria-current='page'] {
+  color: var(--text-accent);
+}
+
+.menu-movil {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-sm);
+  padding-block: var(--espacio-md);
+  border-top: 1px solid var(--border-subtle);
+  background-color: var(--bg-surface);
+}
+
+@media (min-width: 768px) {
+  .navbar__enlaces {
+    display: flex;
+    align-items: center;
+    gap: var(--espacio-md);
+  }
+
+  .navbar__boton-menu {
+    display: none;
+  }
+}
+
+/* ---------- Pie de página ---------- */
+
+.pie {
+  padding-block: var(--espacio-xl);
+  border-top: 1px solid var(--border-subtle);
+  background-color: var(--bg-surface);
+  color: var(--text-muted);
+}
+
+/* ---------- Bloques decorativos (sin archivos de imagen) ---------- */
+
+.bloque-imagen {
+  width: 100%;
+  min-height: 12rem;
+  border: 1px solid var(--border-white-faint);
+  border-radius: var(--radio-lg);
+  background-color: var(--bg-surface-elevated);
+}

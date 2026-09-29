@@ -5,7 +5,8 @@
   "resources": [
     "file://.kiro/steering/tdd.md",
     "file://package.json",
-    "file://vite.config.js"
+    "file://vite.config.ts",
+    "file://tsconfig.json"
   ],
   "permissions": {
     "rules": [
@@ -37,9 +38,9 @@
           "__tests__/**",
           "apuntes/**",
           "index.html",
-          "vite.config.js",
-          "vitest.config.{js,ts}",
-          "vitest.setup.{js,ts}",
+          "vite.config.ts",
+          "vitest.config.ts",
+          "vitest.setup.ts",
           "tsconfig*.json"
         ],
         "effect": "allow"
@@ -92,6 +93,8 @@
           "npm run test *",
           "npm run build",
           "npm run build *",
+          "npm run typecheck",
+          "npm run typecheck *",
           "npx vitest run*",
           "npx tsc --noEmit*",
           "npx vite build*"
