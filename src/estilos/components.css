@@ -33,6 +33,18 @@
   .seccion {
     padding-block: var(--espacio-2xl);
   }
+
+  .grilla--dos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grilla--tres {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .grilla--cuatro {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 /* ---------- Botones ---------- */
@@ -127,20 +139,6 @@
   gap: var(--espacio-md);
 }
 
-@media (min-width: 768px) {
-  .grilla--dos {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .grilla--tres {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .grilla--cuatro {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
 @media (min-width: 1024px) {
   .grilla--cuatro {
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -198,6 +196,20 @@
   color: var(--text-accent);
   font-size: 0.875rem;
   font-weight: 600;
+}
+
+.campo__ayuda {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.campo__opcion {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espacio-xs);
+  min-height: var(--area-activa-min);
+  margin-right: var(--espacio-lg);
+  color: var(--text-main);
 }
 
 /* ---------- Mensajes y estados ---------- */
@@ -308,4 +320,215 @@
   border: 1px solid var(--border-white-faint);
   border-radius: var(--radio-lg);
   background-color: var(--bg-surface-elevated);
+}
+
+/* ---------- Catálogo de entrenamientos ---------- */
+
+.filtros-catalogo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacio-md);
+  margin-bottom: var(--espacio-lg);
+}
+
+.filtros-catalogo__campo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-xs);
+  color: var(--text-muted);
+}
+
+.catalogo__recuento {
+  margin-bottom: var(--espacio-md);
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.tarjeta__descripcion {
+  color: var(--text-muted);
+}
+
+.tarjeta__enlace {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-sm);
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ---------- Reproductor de entrenamiento ---------- */
+
+.visor-video {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  margin-bottom: var(--espacio-md);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radio-sm);
+  background-color: var(--bg-surface-elevated);
+  overflow: hidden;
+}
+
+.visor-video__marco,
+.visor-video__nativo {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.visor-video__mensaje {
+  color: var(--text-muted);
+  text-align: center;
+  padding: var(--espacio-md);
+}
+
+.lista-ejercicios {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-sm);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.fila-ejercicio {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-xs);
+  padding: var(--espacio-md);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radio-sm);
+  background-color: var(--bg-surface-card);
+}
+
+.fila-ejercicio__nombre {
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+.fila-ejercicio__detalle {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+/* ---------- Panel de administración ---------- */
+
+.tarjeta__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacio-sm);
+  margin-top: var(--espacio-sm);
+}
+
+/* ---------- Diálogo de confirmación ---------- */
+
+.dialogo-fondo {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--espacio-md);
+  background-color: var(--bg-glass);
+}
+
+.dialogo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-md);
+  width: 100%;
+  max-width: 28rem;
+  padding: var(--espacio-lg);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radio-md);
+  background-color: var(--bg-surface-elevated);
+  box-shadow: var(--shadow-glow-lg);
+}
+
+.dialogo__titulo {
+  color: var(--text-main);
+}
+
+.dialogo__mensaje {
+  color: var(--text-muted);
+}
+
+.dialogo__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--espacio-sm);
+}
+
+/* ---------- Sesión del reproductor ---------- */
+
+.progreso-sesion {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-sm);
+  margin-bottom: var(--espacio-md);
+}
+
+.progreso-sesion .barra-progreso {
+  flex: 1;
+  margin: 0;
+}
+
+.progreso-sesion__texto {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  font-weight: 600;
+  min-width: 3rem;
+  text-align: right;
+}
+
+.fila-ejercicio__marca {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-sm);
+  cursor: pointer;
+}
+
+.temporizador-descanso {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espacio-sm);
+  margin-top: var(--espacio-sm);
+}
+
+.temporizador-descanso__valor {
+  color: var(--text-main);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.temporizador-descanso__aviso {
+  color: var(--text-accent);
+  font-size: 0.875rem;
+}
+
+.resumen-sesion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-xs);
+  margin-top: var(--espacio-lg);
+  padding: var(--espacio-lg);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radio-md);
+  background-color: var(--bg-surface-elevated);
+  box-shadow: var(--shadow-glow);
+}
+
+.resumen-sesion__titulo {
+  margin: 0;
+  color: var(--text-main);
+}
+
+.resumen-sesion__detalle {
+  margin: 0;
+  color: var(--text-muted);
 }

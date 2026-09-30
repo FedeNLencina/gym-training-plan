@@ -1,5 +1,46 @@
 {
-  "pbtResults": {},
+  "pbtResults": {
+    "2.4 Escribir el test de propiedad de ida y vuelta de serialización": {
+      "status": "passed",
+      "lastRunTimestamp": 1790709055915
+    },
+    "2.7 Escribir el test de propiedad del porcentaje de avance": {
+      "status": "passed",
+      "lastRunTimestamp": 1790709057093
+    },
+    "7.3 Escribir el test de propiedad de unicidad de correo": {
+      "status": "passed",
+      "lastRunTimestamp": 1790709140385
+    },
+    "7.4 Escribir el test de propiedad de credenciales no coincidentes": {
+      "status": "passed",
+      "lastRunTimestamp": 1790709147849
+    },
+    "7.5 Escribir el test de propiedad de descarte de sesión persistida inválida": {
+      "status": "passed",
+      "lastRunTimestamp": 1790709148911
+    },
+    "6.2 Escribir el test de propiedad de ida y vuelta binaria": {
+      "status": "passed",
+      "lastRunTimestamp": 1790709750515
+    },
+    "6.3 Escribir el test de propiedad de lectura de video ausente": {
+      "status": "passed",
+      "lastRunTimestamp": 1790709208780
+    },
+    "9.2 Escribir el test de propiedad de ida y vuelta de autenticación": {
+      "status": "passed",
+      "lastRunTimestamp": 1790711962801
+    },
+    "9.7 Escribir el test de propiedad de reversibilidad del marcado": {
+      "status": "passed",
+      "lastRunTimestamp": 1790710369905
+    },
+    "9.9 Escribir el test de propiedad de la cuenta regresiva": {
+      "status": "passed",
+      "lastRunTimestamp": 1790711963828
+    }
+  },
   "executionHistory": {
     "1.1 Instalar dependencias y configurar el entorno de pruebas": [
       {
@@ -54,6 +95,1125 @@
         "executionId": "2f2381b1-e175-4d05-ae90-bf29d40bf4f6",
         "chatSessionId": "sess_1c563363-b676-474b-96c3-f35e29f790c9",
         "timestamp": 1790705540674
+      }
+    ],
+    "2.2 Implementar las validaciones de dominio": [
+      {
+        "executionId": "bc6ecc42-7c15-428f-9ee4-f0243e1c7ad1",
+        "chatSessionId": "sess_f2104a26-2ef3-4cf3-a5cf-64339e303688",
+        "timestamp": 1790706122523
+      },
+      {
+        "executionId": "bc6ecc42-7c15-428f-9ee4-f0243e1c7ad1",
+        "chatSessionId": "sess_f2104a26-2ef3-4cf3-a5cf-64339e303688",
+        "timestamp": 1790707105438
+      }
+    ],
+    "2.3 Implementar la serialización de Entrenamientos": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707153495
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707171079
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707371242
+      }
+    ],
+    "2.5 Implementar el filtrado de Entrenamientos": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707153675
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707179862
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707375457
+      }
+    ],
+    "2.6 Implementar el cálculo de avance": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707153794
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707183843
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707380170
+      }
+    ],
+    "2.8 Implementar la validación y resolución de enlaces de video": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707153884
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707187640
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707384832
+      }
+    ],
+    "3. Checkpoint del dominio": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707153976
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790709344035
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790709769001
+      }
+    ],
+    "4.1 Implementar el adaptador de almacenamiento local": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707154056
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707400934
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707724356
+      }
+    ],
+    "4.2 Implementar el acceso a IndexedDB": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707154173
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707406427
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707728501
+      }
+    ],
+    "4.3 Implementar el reloj inyectable": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707154307
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707191437
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707389364
+      }
+    ],
+    "5.1 Implementar el RepositorioDatos": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707154389
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707738168
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790708059240
+      }
+    ],
+    "6.1 Implementar el AlmacenVideos sobre IndexedDB": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707154487
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707742248
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790708064413
+      }
+    ],
+    "7.1 Implementar el ServicioAutenticacion": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707154575
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707747593
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790708070006
+      }
+    ],
+    "8. Checkpoint de servicios": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707154655
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790709348513
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790709774735
+      }
+    ],
+    "9.1 Implementar ContextoSesion": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707154737
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790709786748
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790710067622
+      }
+    ],
+    "9.3 Implementar ContextoAvisos": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707154878
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790709791750
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790710074183
+      }
+    ],
+    "9.4 Implementar los hooks de datos useEntrenamientos y usePlanes": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707155008
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790710079694
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790710647274
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790710661523
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790711013016
+      }
+    ],
+    "9.6 Implementar useProgresoEntrenamiento": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707155207
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790710089824
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790710647426
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790710665920
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790711013609
+      }
+    ],
+    "9.8 Implementar useTemporizadorDescanso": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707155302
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790710095094
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790710647518
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790710667052
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790711014242
+      }
+    ],
+    "9.10 Implementar useAnchoVentana": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707155408
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790710099759
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790710647608
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790710668276
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790711014926
+      }
+    ],
+    "10.1 Crear la semilla de datos y el contenido textual": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707155502
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790708252836
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790709338194
+      }
+    ],
+    "11.1 Definir el árbol de rutas y el cableado de la aplicación": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707155602
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790710647744
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790710669391
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790711015642
+      }
+    ],
+    "11.2 Implementar RutaProtegida": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707155704
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790710647839
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790711059004
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790711285463
+      }
+    ],
+    "11.6 Implementar LayoutPublico, Navbar, MenuMovil y PieDePagina": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707155789
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790710647938
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790711292281
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790711839126
+      }
+    ],
+    "12. Checkpoint de navegación": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707155873
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790710648035
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790711848524
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790712002383
+      }
+    ],
+    "13.1 Implementar las secciones estáticas de la Landing_Page": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707156008
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790710648150
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790712015461
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790717420807
+      }
+    ],
+    "13.3 Implementar SeccionCatalogoDestacado": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707156086
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790710648268
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790717437701
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790717990450
+      }
+    ],
+    "13.7 Implementar SeccionPlanes y TarjetaPlan": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707156253
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790710648357
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790717997811
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790718253340
+      }
+    ],
+    "14.1 Implementar Registro e Ingresar": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707156339
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790710648507
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790718260025
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790718480635
+      }
+    ],
+    "15.1 Implementar CatalogoEntrenamientos, FiltrosCatalogo y TarjetaEntrenamiento": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707156451
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790710648603
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790718487186
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790718955459
+      }
+    ],
+    "16. Checkpoint del catálogo": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707156541
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790710648690
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790718961327
+      }
+    ],
+    "17.1 Implementar ReproductorEntrenamiento, ListaEjercicios y FilaEjercicio": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707156647
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790710648775
+      },
+      {
+        "executionId": "93f377cd-69d5-4712-a256-a82ab33211ae",
+        "chatSessionId": "sess_9c1bea56-90b3-4bb1-9a65-d7cde91a9463",
+        "timestamp": 1790722108831
+      },
+      {
+        "executionId": "93f377cd-69d5-4712-a256-a82ab33211ae",
+        "chatSessionId": "sess_9c1bea56-90b3-4bb1-9a65-d7cde91a9463",
+        "timestamp": 1790722478769
+      }
+    ],
+    "17.3 Implementar VisorVideo, VideoEnlace y VideoArchivo": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707156742
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790710648875
+      },
+      {
+        "executionId": "93f377cd-69d5-4712-a256-a82ab33211ae",
+        "chatSessionId": "sess_9c1bea56-90b3-4bb1-9a65-d7cde91a9463",
+        "timestamp": 1790722486192
+      },
+      {
+        "executionId": "93f377cd-69d5-4712-a256-a82ab33211ae",
+        "chatSessionId": "sess_9c1bea56-90b3-4bb1-9a65-d7cde91a9463",
+        "timestamp": 1790723018860
+      }
+    ],
+    "17.6 Integrar progreso, temporizador y resumen de sesión": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707156836
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790710649102
+      },
+      {
+        "executionId": "93f377cd-69d5-4712-a256-a82ab33211ae",
+        "chatSessionId": "sess_9c1bea56-90b3-4bb1-9a65-d7cde91a9463",
+        "timestamp": 1790722487674
+      },
+      {
+        "executionId": "93f377cd-69d5-4712-a256-a82ab33211ae",
+        "chatSessionId": "sess_9c1bea56-90b3-4bb1-9a65-d7cde91a9463",
+        "timestamp": 1790724365629
+      }
+    ],
+    "18.1 Implementar PanelAdmin y ListaEntrenamientosAdmin": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707156925
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790710649362
+      },
+      {
+        "executionId": "93f377cd-69d5-4712-a256-a82ab33211ae",
+        "chatSessionId": "sess_9c1bea56-90b3-4bb1-9a65-d7cde91a9463",
+        "timestamp": 1790722109428
+      },
+      {
+        "executionId": "93f377cd-69d5-4712-a256-a82ab33211ae",
+        "chatSessionId": "sess_9c1bea56-90b3-4bb1-9a65-d7cde91a9463",
+        "timestamp": 1790722479797
+      }
+    ],
+    "18.2 Implementar FormularioEntrenamiento y EditorEjercicios": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707157059
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790710649462
+      },
+      {
+        "executionId": "93f377cd-69d5-4712-a256-a82ab33211ae",
+        "chatSessionId": "sess_9c1bea56-90b3-4bb1-9a65-d7cde91a9463",
+        "timestamp": 1790722488836
+      },
+      {
+        "executionId": "93f377cd-69d5-4712-a256-a82ab33211ae",
+        "chatSessionId": "sess_9c1bea56-90b3-4bb1-9a65-d7cde91a9463",
+        "timestamp": 1790723019999
+      }
+    ],
+    "18.6 Implementar SelectorFuenteVideo, CampoEnlaceVideo y SubidaArchivoVideo": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707157160
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790710649561
+      },
+      {
+        "executionId": "93f377cd-69d5-4712-a256-a82ab33211ae",
+        "chatSessionId": "sess_9c1bea56-90b3-4bb1-9a65-d7cde91a9463",
+        "timestamp": 1790724373012
+      },
+      {
+        "executionId": "93f377cd-69d5-4712-a256-a82ab33211ae",
+        "chatSessionId": "sess_9c1bea56-90b3-4bb1-9a65-d7cde91a9463",
+        "timestamp": 1790725691558
+      }
+    ],
+    "18.11 Implementar DialogoConfirmacion y la eliminación de Entrenamientos": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707157258
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790710649671
+      },
+      {
+        "executionId": "93f377cd-69d5-4712-a256-a82ab33211ae",
+        "chatSessionId": "sess_9c1bea56-90b3-4bb1-9a65-d7cde91a9463",
+        "timestamp": 1790722490571
+      },
+      {
+        "executionId": "93f377cd-69d5-4712-a256-a82ab33211ae",
+        "chatSessionId": "sess_9c1bea56-90b3-4bb1-9a65-d7cde91a9463",
+        "timestamp": 1790724366771
+      }
+    ],
+    "19.1 Completar las reglas de estilo transversales": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707157359
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790710649763
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790712016438
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790717421242
+      }
+    ],
+    "20.5 Verificar el corredor de pruebas y el determinismo de la suite": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707157471
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790710649859
+      },
+      {
+        "executionId": "93f377cd-69d5-4712-a256-a82ab33211ae",
+        "chatSessionId": "sess_9c1bea56-90b3-4bb1-9a65-d7cde91a9463",
+        "timestamp": 1790725698726
+      },
+      {
+        "executionId": "93f377cd-69d5-4712-a256-a82ab33211ae",
+        "chatSessionId": "sess_9c1bea56-90b3-4bb1-9a65-d7cde91a9463",
+        "timestamp": 1790725897817
+      }
+    ],
+    "21. Checkpoint final": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707157586
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790710649975
+      },
+      {
+        "executionId": "93f377cd-69d5-4712-a256-a82ab33211ae",
+        "chatSessionId": "sess_9c1bea56-90b3-4bb1-9a65-d7cde91a9463",
+        "timestamp": 1790726890163
+      }
+    ],
+    "2. Dominio puro": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707385040
+      }
+    ],
+    "4. Infraestructura del navegador": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790707728614
+      }
+    ],
+    "5. Servicio RepositorioDatos": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790708059377
+      }
+    ],
+    "6. Servicio AlmacenVideos": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790708064556
+      }
+    ],
+    "7. Servicio de autenticación": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790708070124
+      }
+    ],
+    "2.4 Escribir el test de propiedad de ida y vuelta de serialización": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790708169610
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790709264661
+      }
+    ],
+    "2.7 Escribir el test de propiedad del porcentaje de avance": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790708174542
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790709269286
+      }
+    ],
+    "5.2 Escribir el test de propiedad de conservación y lectura": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790708179240
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790709273975
+      }
+    ],
+    "5.3 Escribir el test de propiedad del tope de lectura": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790708193269
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790709278627
+      }
+    ],
+    "5.4 Escribir el test de propiedad de descarte de contenido inválido": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790708197592
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790709283189
+      }
+    ],
+    "5.5 Escribir el test de propiedad de idempotencia de escritura": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790708202559
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790709288022
+      }
+    ],
+    "5.6 Escribir el test de propiedad de rechazo de escrituras inválidas": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790708206936
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790709294335
+      }
+    ],
+    "5.7 Escribir los tests de ejemplo de siembra y degradación del almacenamiento": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790708211475
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790709299379
+      }
+    ],
+    "6.2 Escribir el test de propiedad de ida y vuelta binaria": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790708215923
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790709304159
+      }
+    ],
+    "6.3 Escribir el test de propiedad de lectura de video ausente": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790708220475
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790709309165
+      }
+    ],
+    "6.4 Escribir el test de ejemplo de rechazo por cuota": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790708229993
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790709313943
+      }
+    ],
+    "7.2 Escribir el test de propiedad de validación de registro": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790708235022
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790709318411
+      }
+    ],
+    "7.3 Escribir el test de propiedad de unicidad de correo": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790708239609
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790709323426
+      }
+    ],
+    "7.4 Escribir el test de propiedad de credenciales no coincidentes": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790708244186
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790709328124
+      }
+    ],
+    "7.5 Escribir el test de propiedad de descarte de sesión persistida inválida": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790708248484
+      },
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790709333360
+      }
+    ],
+    "10. Datos simulados y contenido de la Landing": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790709338348
+      }
+    ],
+    "9.2 Escribir el test de propiedad de ida y vuelta de autenticación": [
+      {
+        "executionId": "89c1575d-301e-4843-a737-71dd8526a7b5",
+        "chatSessionId": "sess_8e7cc0a7-8168-4bf7-a141-03e0a0a6c0eb",
+        "timestamp": 1790710105221
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790711903414
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790711980803
+      }
+    ],
+    "9. Capa de estado: contextos y hooks": [
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790711014992
+      }
+    ],
+    "11. Enrutador, rutas protegidas y layout": [
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790711839386
+      }
+    ],
+    "9.9 Escribir el test de propiedad de la cuenta regresiva": [
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790711904574
+      },
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790711980023
+      }
+    ],
+    "19. Identidad visual y accesibilidad": [
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790717421310
+      }
+    ],
+    "13. Landing Page": [
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790718253427
+      }
+    ],
+    "14. Vistas de registro e inicio de sesión": [
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790718480721
+      }
+    ],
+    "15. Catálogo de entrenamientos": [
+      {
+        "executionId": "3a8549ea-9b3e-4869-876e-bc94813e477d",
+        "chatSessionId": "sess_f603f56a-d791-4faa-9779-f336424ebd64",
+        "timestamp": 1790718955593
+      }
+    ],
+    "17. Reproductor de entrenamiento": [
+      {
+        "executionId": "93f377cd-69d5-4712-a256-a82ab33211ae",
+        "chatSessionId": "sess_9c1bea56-90b3-4bb1-9a65-d7cde91a9463",
+        "timestamp": 1790724365762
+      }
+    ],
+    "18. Panel de administración": [
+      {
+        "executionId": "93f377cd-69d5-4712-a256-a82ab33211ae",
+        "chatSessionId": "sess_9c1bea56-90b3-4bb1-9a65-d7cde91a9463",
+        "timestamp": 1790725691677
+      }
+    ],
+    "20. Verificaciones estáticas del repositorio": [
+      {
+        "executionId": "93f377cd-69d5-4712-a256-a82ab33211ae",
+        "chatSessionId": "sess_9c1bea56-90b3-4bb1-9a65-d7cde91a9463",
+        "timestamp": 1790725897938
       }
     ]
   }

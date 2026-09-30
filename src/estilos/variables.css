@@ -8,6 +8,9 @@
  */
 
 :root {
+  /* 📐 Área activa mínima táctil por debajo de 768 px (Requirement 9.10) */
+  --area-activa-min: 44px;
+
   /* ⬛ Fondos (Dark Mode Profundo) */
   --bg-main: #000000;
   --bg-surface: #0e1217;

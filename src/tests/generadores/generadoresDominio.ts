@@ -110,10 +110,13 @@ export function arbTexto(min: number, max: number): fc.Arbitrary<string> {
     arbTextoDeLongitud(Math.max(min, 1)),
   ];
   if (max !== min) candidatos.push(arbTextoDeLongitud(max));
+  const minimoEfectivo = Math.max(min, 1);
   return fc.oneof(...candidatos).map((texto) => {
-    // Garantiza que el texto no quede en blanco al recortarlo.
-    if (texto.trim().length > 0) return texto;
-    return `a${texto.slice(1)}`;
+    // Las validaciones de dominio miden el texto recortado, así que un texto
+    // cuyos espacios lo dejarían por debajo del mínimo no sería válido: se
+    // reemplazan por letras, conservando la longitud generada.
+    if (texto.trim().length >= minimoEfectivo) return texto;
+    return texto.replace(/\s/g, 'a');
   });
 }
 
