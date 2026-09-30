@@ -173,4 +173,42 @@ describe('Reglas de estilo transversales', () => {
     const bloque = bloqueTrasSelector(global, 'body');
     expect(bloque).toMatch(/overflow-x:\s*hidden/);
   });
+
+  it('Dado el contenido de la Navbar Cuando se dispone Entonces centra sus elementos de navegación', () => {
+    // La barra queda centrada: los enlaces se agrupan al centro del contenido.
+    const bloque = bloqueTrasSelector(componentes, '.navbar__enlaces {');
+    expect(bloque).toMatch(/justify-content:\s*center/);
+  });
+
+  it('Dado el ancho de escritorio Cuando se presentan los enlaces Entonces la Navbar los centra ocupando el ancho disponible', () => {
+    // El bloque relevante es el @media que declara la regla de .navbar__enlaces.
+    const desdeNavbar = componentes.slice(
+      componentes.indexOf('/* ---------- Navegación'),
+    );
+    const bloque768 = bloqueMedia(desdeNavbar, '@media (min-width: 768px)');
+    const enlaces = bloqueTrasSelector(bloque768, '.navbar__enlaces');
+    expect(enlaces).toMatch(/justify-content:\s*center/);
+    expect(enlaces).toMatch(/display:\s*flex/);
+  });
+
+  it('Dado el menú móvil Cuando se despliega Entonces se presenta como panel lateral fijo desde el costado', () => {
+    // El menú móvil deja de caer como bloque y entra desde el costado.
+    const bloque = bloqueTrasSelector(componentes, '.menu-movil {');
+    expect(bloque).toMatch(/position:\s*fixed/);
+    expect(bloque).toMatch(/right:\s*0/);
+    expect(bloque).toMatch(/top:\s*0/);
+  });
+
+  it('Dado la grilla de planes Cuando se muestra en escritorio Entonces dispone como máximo tres columnas', () => {
+    // Fuera de las at-rules la grilla de planes hereda la única columna base.
+    const fuera = componentes.replace(
+      /@media[^{]*\{(?:[^{}]|\{[^{}]*\})*\}/g,
+      '',
+    );
+    expect(fuera).not.toMatch(/\.grilla--planes[^{]*\{[^}]*repeat\(/);
+
+    const bloque1024 = bloqueMedia(componentes, '@media (min-width: 1024px)');
+    const planes = bloqueTrasSelector(bloque1024, '.grilla--planes');
+    expect(planes).toMatch(/grid-template-columns:\s*repeat\(3,/);
+  });
 });

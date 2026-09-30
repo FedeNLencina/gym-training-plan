@@ -45,6 +45,11 @@
   .grilla--cuatro {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  /* Planes: dos columnas en tablet, tres en escritorio (ver @1024). */
+  .grilla--planes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 /* ---------- Botones ---------- */
@@ -142,6 +147,10 @@
 @media (min-width: 1024px) {
   .grilla--cuatro {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .grilla--planes {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -263,6 +272,7 @@
 
 .navbar__enlaces {
   display: none;
+  justify-content: center;
 }
 
 .navbar__enlace {
@@ -282,19 +292,100 @@
   color: var(--text-accent);
 }
 
+/* Botón hamburguesa: tres barras dibujadas con el token de texto principal. */
+.navbar__boton-menu {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--area-activa-min);
+  min-height: var(--area-activa-min);
+  padding: var(--espacio-sm);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radio-sm);
+  background-color: transparent;
+}
+
+.navbar__boton-menu-barra,
+.navbar__boton-menu-barra::before,
+.navbar__boton-menu-barra::after {
+  display: block;
+  width: 22px;
+  height: 2px;
+  border-radius: var(--radio-sm);
+  background-color: var(--text-main);
+  transition: background-color 150ms ease;
+}
+
+/* La barra central es el propio span; las pseudo son las barras superior e
+   inferior, posicionadas a partir de ella. */
+.navbar__boton-menu-barra {
+  position: relative;
+}
+
+.navbar__boton-menu-barra::before,
+.navbar__boton-menu-barra::after {
+  content: '';
+  position: absolute;
+  left: 0;
+}
+
+.navbar__boton-menu-barra::before {
+  top: -7px;
+}
+
+.navbar__boton-menu-barra::after {
+  top: 7px;
+}
+
+.navbar__boton-menu:hover .navbar__boton-menu-barra,
+.navbar__boton-menu:hover .navbar__boton-menu-barra::before,
+.navbar__boton-menu:hover .navbar__boton-menu-barra::after {
+  background-color: var(--text-accent);
+}
+
+/* Menú móvil: panel lateral que entra desde el costado derecho. */
 .menu-movil {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 30;
   display: flex;
   flex-direction: column;
   gap: var(--espacio-sm);
-  padding-block: var(--espacio-md);
-  border-top: 1px solid var(--border-subtle);
+  width: min(80vw, 20rem);
+  height: 100vh;
+  padding: var(--espacio-xl) var(--espacio-lg);
+  border-left: 1px solid var(--border-subtle);
   background-color: var(--bg-surface);
+  box-shadow: var(--shadow-card);
+  overflow-y: auto;
+  animation: menu-movil-entrada 200ms ease;
+}
+
+@keyframes menu-movil-entrada {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Telón que oscurece el resto de la vista mientras el panel está abierto. */
+.menu-movil__telon {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  background-color: var(--bg-glass);
 }
 
 @media (min-width: 768px) {
   .navbar__enlaces {
     display: flex;
+    flex: 1;
     align-items: center;
+    justify-content: center;
     gap: var(--espacio-md);
   }
 

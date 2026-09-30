@@ -31,14 +31,22 @@ export default function MenuMovil(): ReactElement {
         type="button"
         className="navbar__boton-menu"
         aria-expanded={desplegado}
+        aria-label="Menú"
         onClick={() => setDesplegado((abierto) => !abierto)}
       >
-        Menú
+        <span className="navbar__boton-menu-barra" aria-hidden="true" />
       </button>
       {desplegado ? (
-        <div className="menu-movil">
-          <ElementosNavegacion alNavegar={() => setDesplegado(false)} />
-        </div>
+        <>
+          <div
+            className="menu-movil__telon"
+            aria-hidden="true"
+            onClick={() => setDesplegado(false)}
+          />
+          <div className="menu-movil">
+            <ElementosNavegacion alNavegar={() => setDesplegado(false)} />
+          </div>
+        </>
       ) : null}
     </>
   );
