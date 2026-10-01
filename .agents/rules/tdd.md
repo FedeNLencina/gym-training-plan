@@ -1,5 +1,5 @@
 ---
-trigger: always_on
+trigger: manual
 description: Regla de desarrollo guiado por pruebas (TDD) para frontend y backend.
 ---
 
