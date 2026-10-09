@@ -3,7 +3,7 @@
   "description": "Agente de desarrollo TDD para GymTrainingPlan. Puede explorar, crear componentes/tests/servicios y correr la suite de Vitest sin pedir permiso, pero tiene vedadas las operaciones destructivas y las que tocan credenciales, historial de git o dependencias.",
   "tools": ["read", "write", "shell", "web", "subagent", "context", "todo_list"],
   "resources": [
-    "file://.kiro/steering/tdd.md",
+    "file://.kiro/skills/tdd/SKILL.md",
     "file://package.json",
     "file://vite.config.ts",
     "file://tsconfig.json"
