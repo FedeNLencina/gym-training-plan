@@ -93,14 +93,14 @@ export function ElementosNavegacion({
         <>
           <Link
             to="/ingresar"
-            className="navbar__enlace"
+            className="navbar__enlace navbar__enlace--accion"
             onClick={() => alNavegar?.()}
           >
             Iniciar sesión
           </Link>
           <Link
             to="/registro"
-            className="navbar__enlace"
+            className="navbar__enlace navbar__enlace--destacado"
             onClick={() => alNavegar?.()}
           >
             Registrarme
@@ -108,10 +108,10 @@ export function ElementosNavegacion({
         </>
       ) : (
         <>
-          <span>{sesion.nombre}</span>
+          <span className="navbar__cuenta">{sesion.nombre}</span>
           <button
             type="button"
-            className="navbar__enlace"
+            className="navbar__enlace navbar__enlace--accion"
             onClick={() => {
               void cerrar();
             }}

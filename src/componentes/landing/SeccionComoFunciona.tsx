@@ -25,6 +25,11 @@ export default function SeccionComoFunciona({
         <ol className="grilla grilla--cuatro">
           {pasos.map((paso) => (
             <li key={paso.orden} className="tarjeta">
+              {/* El número repite el orden ya visible en la secuencia: es
+                  decorativo y queda fuera del árbol accesible. */}
+              <span className="paso__numero" aria-hidden="true">
+                {paso.orden}
+              </span>
               <h3 className="tarjeta__titulo">{paso.titulo}</h3>
               <p className="tarjeta__texto">{paso.descripcion}</p>
             </li>

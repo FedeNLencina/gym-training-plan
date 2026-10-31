@@ -19,23 +19,30 @@ import { RUTAS } from '../../rutas/definicionRutas';
 
 export default function SeccionHero(): ReactElement {
   return (
-    <section className="seccion" aria-labelledby="hero-titular">
+    <section className="seccion hero" aria-labelledby="hero-titular">
+      <div className="hero__resplandor" aria-hidden="true" />
       <div className="contenedor">
-        <div className="seccion__encabezado">
-          <h1 id="hero-titular" className="titulo-acento">
-            {HERO_LANDING.titular}
-          </h1>
-          <p className="seccion__bajada">{HERO_LANDING.subtitular}</p>
+        <div className="hero__grilla">
+          <div className="hero__texto">
+            <div className="seccion__encabezado">
+              <h1 id="hero-titular" className="titulo-acento">
+                {HERO_LANDING.titular}
+              </h1>
+              <p className="seccion__bajada">{HERO_LANDING.subtitular}</p>
+            </div>
+            <div className="hero__acciones">
+              <Link className="boton-primario" to={RUTAS.registro}>
+                Comenzar ahora
+              </Link>
+              <Link className="boton-secundario" to={RUTAS.entrenamientos}>
+                Ver entrenamientos
+              </Link>
+            </div>
+          </div>
+          <div className="hero__visual">
+            <div className="bloque-imagen" aria-hidden="true" />
+          </div>
         </div>
-        <div className="hero__acciones">
-          <Link className="boton-primario" to={RUTAS.registro}>
-            Comenzar ahora
-          </Link>
-          <Link className="boton-secundario" to={RUTAS.entrenamientos}>
-            Ver entrenamientos
-          </Link>
-        </div>
-        <div className="bloque-imagen" aria-hidden="true" />
       </div>
     </section>
   );

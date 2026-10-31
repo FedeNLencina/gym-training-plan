@@ -62,7 +62,7 @@ export default function TarjetaEntrenamiento({
       <h3 className="tarjeta__titulo">{entrenamiento.titulo}</h3>
       <Meta entrenamiento={entrenamiento} />
       <p className="tarjeta__descripcion">{entrenamiento.descripcion}</p>
-      <Link className="boton" to={RUTAS.registro}>
+      <Link className="boton boton--compacto" to={RUTAS.registro}>
         {CTA_REGISTRO}
       </Link>
     </li>

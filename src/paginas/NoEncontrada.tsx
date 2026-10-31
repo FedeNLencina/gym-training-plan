@@ -17,10 +17,19 @@ import { RUTAS } from '../rutas/definicionRutas';
 
 export default function NoEncontrada(): ReactElement {
   return (
-    <section>
-      <h1>Página no encontrada</h1>
-      <p>La dirección que buscás no existe o fue movida.</p>
-      <Link to={RUTAS.inicio}>Volver al inicio</Link>
+    <section className="seccion">
+      <div className="contenedor no-encontrada">
+        <span className="no-encontrada__codigo" aria-hidden="true">
+          404
+        </span>
+        <h1>Página no encontrada</h1>
+        <p className="seccion__bajada">
+          La dirección que buscás no existe o fue movida.
+        </p>
+        <Link className="boton boton--primario" to={RUTAS.inicio}>
+          Volver al inicio
+        </Link>
+      </div>
     </section>
   );
 }

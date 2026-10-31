@@ -72,7 +72,7 @@ export default function SeccionCatalogoDestacado(): ReactElement {
         {destacados.length === 0 ? (
           <p className="seccion__bajada">{MENSAJE_CATALOGO_VACIO}</p>
         ) : (
-          <ul className="grilla grilla--cuatro">
+          <ul className="grilla grilla--tres">
             {destacados.map((entrenamiento) => (
               <TarjetaDestacada
                 key={entrenamiento.id}

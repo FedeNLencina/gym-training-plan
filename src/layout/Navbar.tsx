@@ -12,7 +12,10 @@
  */
 import { type ReactElement } from 'react';
 
+import { Link } from 'react-router-dom';
+
 import { useAnchoVentana } from '../estado/useAnchoVentana';
+import { RUTAS } from '../rutas/definicionRutas';
 import { ElementosNavegacion } from './ElementosNavegacion';
 import MenuMovil from './MenuMovil';
 
@@ -20,16 +23,24 @@ export default function Navbar(): ReactElement {
   const { esEscritorio } = useAnchoVentana();
 
   return (
-    <nav className="navbar" aria-label="Principal">
-      <div className="navbar__contenido">
-        {esEscritorio ? (
-          <div className="navbar__enlaces">
-            <ElementosNavegacion />
-          </div>
-        ) : (
-          <MenuMovil />
-        )}
+    <header className="navbar">
+      <div className="navbar__contenido contenedor">
+        {/* La marca queda fuera del `nav` para que Inicio, Entrenamientos y
+            Planes sigan siendo los tres primeros enlaces de la región
+            "Principal" (2.1). */}
+        <Link className="navbar__marca" to={RUTAS.inicio}>
+          Atlas<span className="navbar__marca-acento">Gym</span>
+        </Link>
+        <nav className="navbar__navegacion" aria-label="Principal">
+          {esEscritorio ? (
+            <div className="navbar__enlaces">
+              <ElementosNavegacion />
+            </div>
+          ) : (
+            <MenuMovil />
+          )}
+        </nav>
       </div>
-    </nav>
+    </header>
   );
 }
