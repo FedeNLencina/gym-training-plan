@@ -79,6 +79,19 @@ export function ElementosNavegacion({
         Planes
       </Link>
 
+      {/* Queda después de los tres elementos que fija el criterio 2.1 para no
+          alterar ese orden, y sólo con sesión activa: sin cuenta no hay
+          progreso que mostrar. */}
+      {sesion !== null ? (
+        <Link
+          to="/mi-progreso"
+          className="navbar__enlace"
+          onClick={() => alNavegar?.()}
+        >
+          Mi progreso
+        </Link>
+      ) : null}
+
       {sesion !== null && sesion.rol === 'administrador' ? (
         <Link
           to="/admin"

@@ -33,7 +33,9 @@
  * Cubre: 7.1, 7.2, 7.6, 7.9
  */
 import { type ReactElement } from 'react';
+import { Link } from 'react-router-dom';
 
+import { RUTAS } from '../rutas/definicionRutas';
 import { useAvisos } from '../estado/ContextoAvisos';
 import { usarServicios } from '../estado/ContextoServicios';
 import { useEntrenamientos } from '../estado/useEntrenamientos';
@@ -53,6 +55,9 @@ function Vista({ children }: { children: ReactElement }): ReactElement {
       <div className="contenedor">
         <div className="seccion__encabezado">
           <h1 id="panel-admin-titulo">{TITULO_PANEL_ADMIN}</h1>
+          <Link className="tarjeta__enlace" to={RUTAS.adminUsuarios}>
+            Gestionar usuarios
+          </Link>
         </div>
         {children}
       </div>

@@ -14,13 +14,12 @@
  * La vista raíz ya monta la `Landing_Page` real (tarea 13.1), las direcciones
  * de registro e ingreso montan las vistas reales `Registro` e `Ingresar`
  * (tarea 14.1), el catálogo monta la vista real `CatalogoEntrenamientos`
- * (tarea 15.1) y `/admin` monta el `PanelAdmin` real tras la guarda
- * `RutaProtegida` que exige rol administrador (tarea 18.1, criterios 7.2 y 7.8).
- * La vista de detalle del Reproductor sigue siendo un marcador de posición: su
- * implementación definitiva corresponde a una tarea posterior. Lo que estas
- * rutas fijan y prueban es que cada dirección declarada resuelve a su vista o a
- * su redirección definida, bajo `LayoutPublico`, y que toda dirección no
- * declarada resuelve a la página inexistente.
+ * (tarea 15.1), el detalle monta el `ReproductorEntrenamiento` real y `/admin`
+ * monta el `PanelAdmin` real tras la guarda `RutaProtegida` que exige rol
+ * administrador (tarea 18.1, criterios 7.2 y 7.8). Lo que estas rutas fijan y
+ * prueban es que cada dirección declarada resuelve a su vista o a su
+ * redirección definida, bajo `LayoutPublico`, y que toda dirección no declarada
+ * resuelve a la página inexistente.
  *
  * Cubre: 2.1, 2.12, 2.15
  */
@@ -30,12 +29,16 @@ import { Route, Routes } from 'react-router-dom';
 
 import LayoutPublico from '../layout/LayoutPublico';
 import CatalogoEntrenamientos from '../paginas/CatalogoEntrenamientos';
+import GestionUsuarios from '../paginas/GestionUsuarios';
 import Ingresar from '../paginas/Ingresar';
 import LandingPage from '../paginas/LandingPage';
+import MiProgreso from '../paginas/MiProgreso';
 import NoEncontrada from '../paginas/NoEncontrada';
 import PanelAdmin from '../paginas/PanelAdmin';
 import Registro from '../paginas/Registro';
+import ReproductorEntrenamiento from '../paginas/ReproductorEntrenamiento';
 import { RutaProtegida } from './RutaProtegida';
+
 
 /**
  * Direcciones declaradas de la Plataforma. `detalleEntrenamiento` es una función
@@ -48,19 +51,12 @@ export const RUTAS = Object.freeze({
   registro: '/registro',
   ingresar: '/ingresar',
   admin: '/admin',
+  adminUsuarios: '/admin/usuarios',
+  miProgreso: '/mi-progreso',
 } as const);
 
 /** Patrón del segmento dinámico del detalle de un Entrenamiento. */
 export const PATRON_DETALLE_ENTRENAMIENTO = '/entrenamientos/:id';
-
-/** Marcador de posición de una vista todavía no implementada. */
-function VistaPlaceholder({ titulo }: { titulo: string }): ReactElement {
-  return (
-    <section>
-      <h1>{titulo}</h1>
-    </section>
-  );
-}
 
 /**
  * Árbol de rutas. Se exporta como componente (no como `BrowserRouter`) para que
@@ -75,9 +71,7 @@ export function ArbolRutas(): ReactElement {
         <Route path="entrenamientos" element={<CatalogoEntrenamientos />} />
         <Route
           path="entrenamientos/:id"
-          element={
-            <VistaPlaceholder titulo="Reproductor de entrenamiento" />
-          }
+          element={<ReproductorEntrenamiento />}
         />
         <Route path="registro" element={<Registro />} />
         <Route path="ingresar" element={<Ingresar />} />
@@ -86,6 +80,22 @@ export function ArbolRutas(): ReactElement {
           element={
             <RutaProtegida rolRequerido="administrador">
               <PanelAdmin />
+            </RutaProtegida>
+          }
+        />
+        <Route
+          path="admin/usuarios"
+          element={
+            <RutaProtegida rolRequerido="administrador">
+              <GestionUsuarios />
+            </RutaProtegida>
+          }
+        />
+        <Route
+          path="mi-progreso"
+          element={
+            <RutaProtegida>
+              <MiProgreso />
             </RutaProtegida>
           }
         />

@@ -42,6 +42,7 @@ export const CLAVES_ALMACENAMIENTO = Object.freeze({
   entrenamientos: 'atlas.entrenamientos',
   cuentas: 'atlas.cuentas',
   sesion: 'atlas.sesion',
+  progreso: 'atlas.progreso',
 } as const);
 
 /** Clave descartable con la que se sondea la disponibilidad del medio. */

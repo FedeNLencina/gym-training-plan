@@ -23,10 +23,12 @@ import { crearEntrenamientosSimulados } from '../datos/entrenamientosSimulados';
 import { HERO_LANDING } from '../datos/heroLanding';
 import { ProveedorAvisos } from '../estado/ContextoAvisos';
 import { ProveedorServicios } from '../estado/ContextoServicios';
-import { ProveedorSesion } from '../estado/ContextoSesion';
+import {
+  ProveedorSesion,
+  type ServicioDeSesion,
+} from '../estado/ContextoSesion';
 import PieDePagina from '../layout/PieDePagina';
 import { ArbolRutas, RUTAS } from '../rutas/definicionRutas';
-import type { ServicioAutenticacion } from '../servicios/servicioAutenticacion';
 import { crearRelojFalso } from '../tests/dobles/relojFalso';
 import { crearRepositorioEnMemoria } from '../tests/dobles/repositorioEnMemoria';
 import LandingPage from './LandingPage';
@@ -42,7 +44,7 @@ const ENCABEZADOS_EN_ORDEN = [
   'Pie de página',
 ];
 
-const servicioSinSesion: ServicioAutenticacion = {
+const servicioSinSesion: ServicioDeSesion = {
   async registrar() {
     throw new Error('no usado');
   },

@@ -1676,3 +1676,126 @@
   color: var(--primary);
   text-shadow: var(--shadow-glow-lg);
 }
+
+/* --- Gestión de usuarios del Panel_Admin ---------------------------------- */
+
+.lista-usuarios {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lista-usuarios__fila {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.lista-usuarios__identidad {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.lista-usuarios__correo {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  overflow-wrap: anywhere;
+}
+
+/* Distingue la fila del propio Administrador de las demás. */
+.lista-usuarios__propia {
+  margin-left: 8px;
+  font-size: 0.75rem;
+  vertical-align: middle;
+}
+
+.lista-usuarios__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+/* Variante angosta del campo, para que el selector de rol no ocupe la fila. */
+.campo--compacto {
+  gap: 4px;
+  min-width: 160px;
+}
+
+.campo--compacto .campo__etiqueta {
+  font-size: 0.75rem;
+  color: var(--text-dimmed);
+}
+
+/* --- Vista Mi progreso ---------------------------------------------------- */
+
+.estadisticas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  margin: 0 0 32px;
+  padding: 0;
+  list-style: none;
+}
+
+.estadistica {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 20px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  background: var(--bg-surface-card);
+}
+
+.estadistica__valor {
+  color: var(--text-accent);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.estadistica__etiqueta {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.historial {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.historial__fila {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  background: var(--bg-surface);
+}
+
+.historial__titulo {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.historial__detalle {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}

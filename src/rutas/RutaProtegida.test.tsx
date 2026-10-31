@@ -27,10 +27,12 @@ import { crearCuenta, crearSesion, type Sesion } from '../dominio/modelos';
 import type {
   Credenciales,
   DatosRegistro,
-  ServicioAutenticacion,
 } from '../servicios/servicioAutenticacion';
 import { ProveedorAvisos, RegionAvisos } from '../estado/ContextoAvisos';
-import { ProveedorSesion } from '../estado/ContextoSesion';
+import {
+  ProveedorSesion,
+  type ServicioDeSesion,
+} from '../estado/ContextoSesion';
 import { RutaProtegida } from './RutaProtegida';
 
 // --- Doble del ServicioAutenticacion ----------------------------------------
@@ -45,7 +47,7 @@ type OpcionesServicioFalso = {
 function crearServicioFalso({
   sesionPersistida = null,
   diferirRestauracion = false,
-}: OpcionesServicioFalso = {}): ServicioAutenticacion {
+}: OpcionesServicioFalso = {}): ServicioDeSesion {
   return {
     async registrar({ nombre, correo, idPlan = null }: DatosRegistro) {
       return crearSesion(crearCuenta({ nombre, correo, rol: 'usuario', idPlan }));

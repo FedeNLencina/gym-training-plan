@@ -49,8 +49,23 @@ export type ValorContextoSesion = {
 
 const ContextoSesion = createContext<ValorContextoSesion | null>(null);
 
+/**
+ * Porción del ServicioAutenticacion que el proveedor necesita: abrir, cerrar y
+ * restaurar la sesión propia. Deja afuera la gestión de cuentas ajenas
+ * (`listarCuentas`, `cambiarRol`, `eliminarCuenta`), que es asunto del
+ * Panel_Admin y llega por el ContextoServicios.
+ *
+ * Acotar la dependencia no es sólo prolijidad: permite que un doble de prueba
+ * implemente únicamente lo que la sesión usa, en lugar de arrastrar métodos de
+ * administración que esa prueba no ejercita.
+ */
+export type ServicioDeSesion = Pick<
+  ServicioAutenticacion,
+  'registrar' | 'ingresar' | 'cerrarSesion' | 'restaurarSesion' | 'cuentaDe'
+>;
+
 export type PropiedadesProveedorSesion = {
-  servicio: ServicioAutenticacion;
+  servicio: ServicioDeSesion;
   children: ReactNode;
 };
 

@@ -24,9 +24,11 @@ import {
   type ReactNode,
 } from 'react';
 
-import type { Entrenamiento } from '../dominio/modelos';
+import type { Entrenamiento, Rol } from '../dominio/modelos';
 import type { Reloj } from '../infra/reloj';
 import type { RepositorioDatos } from '../servicios/repositorioDatos';
+import type { ResumenCuenta } from '../servicios/servicioAutenticacion';
+import type { ServicioProgreso } from '../servicios/servicioProgreso';
 
 /**
  * Repositorio tal como lo ven las vistas a través del contexto. Coincide con
@@ -69,10 +71,36 @@ export type AlmacenVideosDeVistas = {
   eliminarVideo?: (idEntrenamiento: string) => Promise<void>;
 };
 
+/**
+ * Gestión de cuentas tal como la ve el Panel_Admin: el subconjunto del
+ * ServicioAutenticacion que administra Usuarios, sin registro, ingreso ni
+ * restauración de sesión, que son asunto del ContextoSesion. Acotarlo deja
+ * explícito que esta vista administra cuentas ajenas y no toca la sesión propia.
+ */
+export type GestionCuentas = {
+  listarCuentas: () => Promise<ResumenCuenta[]>;
+  cambiarRol: (correo: string, rol: Rol) => Promise<ResumenCuenta>;
+  cambiarPlan: (
+    correo: string,
+    idPlan: string | null,
+  ) => Promise<ResumenCuenta>;
+  eliminarCuenta: (correo: string) => Promise<void>;
+};
+
+/**
+ * ServicioProgreso tal como lo ven las vistas. Es nulo cuando la Plataforma se
+ * monta sin persistencia de progreso: en ese caso el avance del Reproductor
+ * vive sólo durante la visita, igual que antes de que existiera el servicio.
+ * Las pruebas que no ejercitan progreso pueden entonces omitirlo.
+ */
+export type ProgresoDeVistas = ServicioProgreso;
+
 export type ValorContextoServicios = {
   repositorio: RepositorioDeVistas;
   reloj: Reloj;
   almacenVideos: AlmacenVideosDeVistas | null;
+  servicioProgreso: ProgresoDeVistas | null;
+  gestionCuentas: GestionCuentas | null;
 };
 
 const ContextoServicios = createContext<ValorContextoServicios | null>(null);
@@ -81,6 +109,8 @@ export type PropiedadesProveedorServicios = {
   repositorio: RepositorioDeVistas;
   reloj: Reloj;
   almacenVideos?: AlmacenVideosDeVistas | null;
+  servicioProgreso?: ProgresoDeVistas | null;
+  gestionCuentas?: GestionCuentas | null;
   children: ReactNode;
 };
 
@@ -88,11 +118,19 @@ export function ProveedorServicios({
   repositorio,
   reloj,
   almacenVideos = null,
+  servicioProgreso = null,
+  gestionCuentas = null,
   children,
 }: PropiedadesProveedorServicios): ReactElement {
   const valor = useMemo<ValorContextoServicios>(
-    () => ({ repositorio, reloj, almacenVideos }),
-    [repositorio, reloj, almacenVideos],
+    () => ({
+      repositorio,
+      reloj,
+      almacenVideos,
+      servicioProgreso,
+      gestionCuentas,
+    }),
+    [repositorio, reloj, almacenVideos, servicioProgreso, gestionCuentas],
   );
 
   return (

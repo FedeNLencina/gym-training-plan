@@ -11,8 +11,10 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import {
   ErrorCorreoRegistrado,
   ErrorCredenciales,
+  ErrorOperacionNoPermitida,
   ErrorValidacion,
 } from '../dominio/errores';
+import { crearCuenta, type Rol } from '../dominio/modelos';
 import {
   CLAVES_ALMACENAMIENTO,
   crearAlmacenamientoLocal,
@@ -353,6 +355,318 @@ describe('ServicioAutenticacion', () => {
       const sesion = await servicio.ingresar(CREDENCIALES_ADMINISTRADOR);
 
       expect(sesion.rol).toBe('administrador');
+    });
+  });
+
+  describe('siembra de cuentas de prueba', () => {
+    const CUENTAS_SEMILLA = Object.freeze([
+      crearCuenta({
+        id: 'cuenta-sembrada-usuario',
+        nombre: 'Usuario Sembrado',
+        correo: 'sembrado@atlasgym.com',
+        contrasenia: 'AtlasPrueba2024',
+        rol: 'usuario',
+        idPlan: 'plan-base',
+      }),
+      crearCuenta({
+        id: 'cuenta-sembrada-admin',
+        nombre: 'Admin Sembrado',
+        correo: 'admin-sembrado@atlasgym.com',
+        contrasenia: 'AtlasPrueba2024',
+        rol: 'administrador',
+        idPlan: null,
+      }),
+    ]);
+
+    const crearServicioSembrado = (): ReturnType<
+      typeof crearServicioAutenticacion
+    > =>
+      crearServicioAutenticacion({
+        almacenamiento: crearAlmacenamientoLocal({ medio }),
+        datosIniciales: { cuentas: CUENTAS_SEMILLA },
+      });
+
+    it('Dado un almacenamiento vacío, Cuando se construye con cuentas iniciales, Entonces se puede ingresar con una cuenta sembrada', async () => {
+      const servicio = crearServicioSembrado();
+
+      const sesion = await servicio.ingresar({
+        correo: 'sembrado@atlasgym.com',
+        contrasenia: 'AtlasPrueba2024',
+      });
+
+      expect(sesion).toEqual({
+        correo: 'sembrado@atlasgym.com',
+        nombre: 'Usuario Sembrado',
+        rol: 'usuario',
+      });
+    });
+
+    it('Dado un almacenamiento vacío, Cuando se construye con cuentas iniciales, Entonces las conserva en el almacenamiento', async () => {
+      crearServicioSembrado();
+
+      expect(leerCuentasCrudas()).toContain('sembrado@atlasgym.com');
+    });
+
+    it('Dado un almacenamiento vacío, Cuando se construye con cuentas iniciales, Entonces conserva también al Administrador principal', async () => {
+      const servicio = crearServicioSembrado();
+
+      const sesion = await servicio.ingresar(CREDENCIALES_ADMINISTRADOR);
+
+      expect(sesion.rol).toBe('administrador');
+    });
+
+    it('Dadas cuentas ya almacenadas, Cuando se construye con cuentas iniciales, Entonces no siembra encima de lo existente', async () => {
+      // La siembra es sólo del primer arranque: si ya hay cuentas guardadas,
+      // volver a sembrar resucitaría cuentas que el Administrador eliminó.
+      await crearServicio().registrar(REGISTRO_VALIDO);
+
+      const servicio = crearServicioSembrado();
+
+      expect(servicio.cuentaDe('sembrado@atlasgym.com')).toBeNull();
+    });
+
+    it('Dado un almacenamiento con el sobre de cuentas vacío, Cuando se construye con cuentas iniciales, Entonces respeta la lista vacía', async () => {
+      // Un sobre presente con cero cuentas es un estado legítimo: el
+      // Administrador pudo haber eliminado todas las cuentas de Usuario.
+      medio.fijar(
+        CLAVES_ALMACENAMIENTO.cuentas,
+        JSON.stringify({ version: 1, cuentas: [] }),
+      );
+
+      const servicio = crearServicioSembrado();
+
+      expect(servicio.cuentaDe('sembrado@atlasgym.com')).toBeNull();
+    });
+
+    it('Dado un almacenamiento con contenido corrupto, Cuando se construye con cuentas iniciales, Entonces siembra de nuevo', async () => {
+      medio.fijar(CLAVES_ALMACENAMIENTO.cuentas, '{esto no es json');
+
+      const servicio = crearServicioSembrado();
+
+      expect(servicio.cuentaDe('sembrado@atlasgym.com')).not.toBeNull();
+    });
+
+    it('Dado un almacenamiento vacío, Cuando se construye sin cuentas iniciales, Entonces sólo existe el Administrador principal', async () => {
+      const servicio = crearServicio();
+
+      const cuentas = await servicio.listarCuentas();
+
+      expect(cuentas.map((cuenta) => cuenta.correo)).toEqual([
+        CREDENCIALES_ADMINISTRADOR.correo,
+      ]);
+    });
+  });
+
+  describe('listarCuentas', () => {
+    it('Dadas varias cuentas, Cuando se listan, Entonces incluye al Administrador y a los Usuarios registrados', async () => {
+      const servicio = crearServicio();
+      await servicio.registrar(REGISTRO_VALIDO);
+
+      const cuentas = await servicio.listarCuentas();
+
+      expect(cuentas.map((cuenta) => cuenta.correo).sort()).toEqual(
+        [CREDENCIALES_ADMINISTRADOR.correo, REGISTRO_VALIDO.correo].sort(),
+      );
+    });
+
+    it('Dadas varias cuentas, Cuando se listan, Entonces ninguna expone su contraseña', async () => {
+      // El listado alimenta la vista del Panel_Admin: la contraseña no tiene
+      // por qué salir del servicio.
+      const servicio = crearServicio();
+      await servicio.registrar(REGISTRO_VALIDO);
+
+      const cuentas = await servicio.listarCuentas();
+
+      expect(
+        cuentas.every((cuenta) => !('contrasenia' in cuenta)),
+      ).toBe(true);
+    });
+
+    it('Dada una cuenta con plan, Cuando se lista, Entonces conserva su identificador de plan', async () => {
+      const servicio = crearServicio();
+      await servicio.registrar({ ...REGISTRO_VALIDO, idPlan: 'plan-progreso' });
+
+      const cuentas = await servicio.listarCuentas();
+
+      expect(
+        cuentas.find((cuenta) => cuenta.correo === REGISTRO_VALIDO.correo)
+          ?.idPlan,
+      ).toBe('plan-progreso');
+    });
+
+    it('Dado el listado de cuentas, Cuando se muta el resultado, Entonces el estado del servicio queda intacto', async () => {
+      const servicio = crearServicio();
+      const cuentas = await servicio.listarCuentas();
+      cuentas.length = 0;
+
+      expect((await servicio.listarCuentas()).length).toBe(1);
+    });
+  });
+
+  describe('cambiarRol', () => {
+    it('Dado un Usuario, Cuando el Administrador lo promueve, Entonces su cuenta queda con rol administrador', async () => {
+      const servicio = crearServicio();
+      await servicio.registrar(REGISTRO_VALIDO);
+
+      const actualizada = await servicio.cambiarRol(
+        REGISTRO_VALIDO.correo,
+        'administrador',
+      );
+
+      expect(actualizada.rol).toBe('administrador');
+    });
+
+    it('Dado un Usuario promovido, Cuando se construye el servicio de nuevo, Entonces el rol nuevo persiste', async () => {
+      await crearServicio().registrar(REGISTRO_VALIDO);
+      await crearServicio().cambiarRol(REGISTRO_VALIDO.correo, 'administrador');
+
+      const cuenta = crearServicio().cuentaDe(REGISTRO_VALIDO.correo);
+
+      expect(cuenta?.rol).toBe('administrador');
+    });
+
+    it('Dado el único Administrador, Cuando se lo degrada a usuario, Entonces rechaza con ErrorOperacionNoPermitida', async () => {
+      // La Plataforma no puede quedarse sin ningún Administrador.
+      const servicio = crearServicio();
+
+      await expect(
+        servicio.cambiarRol(CREDENCIALES_ADMINISTRADOR.correo, 'usuario'),
+      ).rejects.toThrow(ErrorOperacionNoPermitida);
+    });
+
+    it('Dado el único Administrador, Cuando se intenta degradarlo, Entonces conserva su rol', async () => {
+      const servicio = crearServicio();
+
+      await servicio
+        .cambiarRol(CREDENCIALES_ADMINISTRADOR.correo, 'usuario')
+        .catch(() => null);
+
+      expect(servicio.cuentaDe(CREDENCIALES_ADMINISTRADOR.correo)?.rol).toBe(
+        'administrador',
+      );
+    });
+
+    it('Dados dos Administradores, Cuando se degrada a uno, Entonces lo permite', async () => {
+      const servicio = crearServicio();
+      await servicio.registrar(REGISTRO_VALIDO);
+      await servicio.cambiarRol(REGISTRO_VALIDO.correo, 'administrador');
+
+      const actualizada = await servicio.cambiarRol(
+        REGISTRO_VALIDO.correo,
+        'usuario',
+      );
+
+      expect(actualizada.rol).toBe('usuario');
+    });
+
+    it('Dado un correo inexistente, Cuando se cambia el rol, Entonces rechaza con ErrorValidacion', async () => {
+      const servicio = crearServicio();
+
+      await expect(
+        servicio.cambiarRol('fantasma@atlasgym.com', 'administrador'),
+      ).rejects.toThrow(ErrorValidacion);
+    });
+
+    it('Dado un rol fuera de la unión, Cuando se cambia el rol, Entonces rechaza con ErrorValidacion', async () => {
+      const servicio = crearServicio();
+      await servicio.registrar(REGISTRO_VALIDO);
+
+      await expect(
+        servicio.cambiarRol(REGISTRO_VALIDO.correo, 'dueño' as Rol),
+      ).rejects.toThrow(ErrorValidacion);
+    });
+  });
+
+  describe('cambiarPlan', () => {
+    it('Dado un Usuario sin plan, Cuando el Administrador le asigna uno, Entonces su cuenta queda con ese plan', async () => {
+      const servicio = crearServicio();
+      await servicio.registrar(REGISTRO_VALIDO);
+
+      const actualizada = await servicio.cambiarPlan(
+        REGISTRO_VALIDO.correo,
+        'plan-integral',
+      );
+
+      expect(actualizada.idPlan).toBe('plan-integral');
+    });
+
+    it('Dado un Usuario con plan, Cuando el Administrador le quita el plan, Entonces su cuenta queda sin plan', async () => {
+      const servicio = crearServicio();
+      await servicio.registrar({ ...REGISTRO_VALIDO, idPlan: 'plan-base' });
+
+      const actualizada = await servicio.cambiarPlan(
+        REGISTRO_VALIDO.correo,
+        null,
+      );
+
+      expect(actualizada.idPlan).toBeNull();
+    });
+
+    it('Dado un correo inexistente, Cuando se cambia el plan, Entonces rechaza con ErrorValidacion', async () => {
+      const servicio = crearServicio();
+
+      await expect(
+        servicio.cambiarPlan('fantasma@atlasgym.com', 'plan-base'),
+      ).rejects.toThrow(ErrorValidacion);
+    });
+  });
+
+  describe('eliminarCuenta', () => {
+    it('Dado un Usuario registrado, Cuando el Administrador lo elimina, Entonces su cuenta deja de existir', async () => {
+      const servicio = crearServicio();
+      await servicio.registrar(REGISTRO_VALIDO);
+
+      await servicio.eliminarCuenta(REGISTRO_VALIDO.correo);
+
+      expect(servicio.cuentaDe(REGISTRO_VALIDO.correo)).toBeNull();
+    });
+
+    it('Dado un Usuario eliminado, Cuando intenta ingresar, Entonces rechaza con ErrorCredenciales', async () => {
+      const servicio = crearServicio();
+      await servicio.registrar(REGISTRO_VALIDO);
+      await servicio.eliminarCuenta(REGISTRO_VALIDO.correo);
+
+      await expect(
+        servicio.ingresar({
+          correo: REGISTRO_VALIDO.correo,
+          contrasenia: REGISTRO_VALIDO.contrasenia,
+        }),
+      ).rejects.toThrow(ErrorCredenciales);
+    });
+
+    it('Dado un Usuario eliminado, Cuando se construye el servicio de nuevo, Entonces la eliminación persiste', async () => {
+      await crearServicio().registrar(REGISTRO_VALIDO);
+      await crearServicio().eliminarCuenta(REGISTRO_VALIDO.correo);
+
+      expect(crearServicio().cuentaDe(REGISTRO_VALIDO.correo)).toBeNull();
+    });
+
+    it('Dado el Administrador principal, Cuando se intenta eliminarlo, Entonces rechaza con ErrorOperacionNoPermitida', async () => {
+      const servicio = crearServicio();
+
+      await expect(
+        servicio.eliminarCuenta(CREDENCIALES_ADMINISTRADOR.correo),
+      ).rejects.toThrow(ErrorOperacionNoPermitida);
+    });
+
+    it('Dado el Administrador principal, Cuando se intenta eliminarlo, Entonces su cuenta sigue existiendo', async () => {
+      const servicio = crearServicio();
+
+      await servicio
+        .eliminarCuenta(CREDENCIALES_ADMINISTRADOR.correo)
+        .catch(() => null);
+
+      expect(servicio.cuentaDe(CREDENCIALES_ADMINISTRADOR.correo)).not.toBeNull();
+    });
+
+    it('Dado un correo inexistente, Cuando se elimina, Entonces no altera el conjunto de cuentas', async () => {
+      // Borrado idempotente, igual que el del Repositorio_Datos.
+      const servicio = crearServicio();
+      const antes = await servicio.listarCuentas();
+
+      await servicio.eliminarCuenta('fantasma@atlasgym.com');
+
+      expect(await servicio.listarCuentas()).toEqual(antes);
     });
   });
 });

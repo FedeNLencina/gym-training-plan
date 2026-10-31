@@ -20,6 +20,8 @@ import {
   ErrorAlmacenamiento,
   ErrorCorreoRegistrado,
   ErrorCredenciales,
+  ErrorOperacionNoPermitida,
+  ErrorValidacion,
 } from '../dominio/errores';
 import {
   ROLES,
@@ -73,6 +75,19 @@ export type Credenciales = {
   contrasenia: string;
 };
 
+/**
+ * Cuenta tal como la ve la gestión de usuarios del Panel_Admin: todo lo que
+ * hace falta para listar y administrar, sin la contraseña. El tipo existe para
+ * que la contraseña no pueda salir del servicio por descuido.
+ */
+export type ResumenCuenta = {
+  id: string;
+  nombre: string;
+  correo: string;
+  rol: Rol;
+  idPlan: string | null;
+};
+
 export type ServicioAutenticacion = {
   registrar: (datos: DatosRegistro) => Promise<Sesion>;
   ingresar: (credenciales: Credenciales) => Promise<Sesion>;
@@ -80,10 +95,24 @@ export type ServicioAutenticacion = {
   restaurarSesion: () => Promise<Sesion | null>;
   /** Copia de la cuenta con ese correo, para aserciones y para el Panel_Admin. */
   cuentaDe: (correo: string) => Cuenta | null;
+  /** Cuentas existentes, sin contraseñas, para la gestión de usuarios. */
+  listarCuentas: () => Promise<ResumenCuenta[]>;
+  /** Cambia el rol de una cuenta. Falla si dejaría la Plataforma sin Administrador. */
+  cambiarRol: (correo: string, rol: Rol) => Promise<ResumenCuenta>;
+  /** Asigna o quita el plan de una cuenta. */
+  cambiarPlan: (correo: string, idPlan: string | null) => Promise<ResumenCuenta>;
+  /** Elimina una cuenta. Idempotente; no admite eliminar al Administrador principal. */
+  eliminarCuenta: (correo: string) => Promise<void>;
+};
+
+/** Cuentas de prueba con las que sembrar el primer arranque. */
+export type DatosInicialesAutenticacion = {
+  cuentas?: readonly Cuenta[];
 };
 
 export type OpcionesServicioAutenticacion = {
   almacenamiento: AlmacenamientoLocal;
+  datosIniciales?: DatosInicialesAutenticacion;
 };
 
 // --- Serialización -----------------------------------------------------------
@@ -143,7 +172,17 @@ function interpretar(contenido: string | null): unknown {
 
 export function crearServicioAutenticacion({
   almacenamiento,
+  datosIniciales = {},
 }: OpcionesServicioAutenticacion): ServicioAutenticacion {
+  /**
+   * Cuentas de prueba del primer arranque, sin la copia del Administrador
+   * principal: ésa se reinyecta aparte y duplicarla rompería la unicidad del
+   * correo.
+   */
+  const semilla = (datosIniciales.cuentas ?? []).filter(
+    (cuenta) => cuenta.correo !== CREDENCIALES_ADMINISTRADOR.correo,
+  );
+
   /** Lectura tolerante: un almacenamiento caído no impide usar la Plataforma. */
   const leer = (clave: string): string | null => {
     try {
@@ -172,22 +211,43 @@ export function crearServicioAutenticacion({
   };
 
   /**
-   * Cuentas almacenadas, con la cuenta del Administrador siempre presente: la
-   * semilla se reinyecta en cada lectura para que un almacenamiento vaciado o
+   * Cuentas almacenadas, con la cuenta del Administrador principal siempre
+   * presente: se reinyecta en cada lectura para que un almacenamiento vaciado o
    * corrupto no deje la Plataforma sin Administrador.
+   *
+   * Sólo se descarta la copia almacenada del Administrador principal, no la de
+   * todo administrador: una cuenta que el Panel_Admin promovió a administrador
+   * tiene que conservar ese rol al recargar.
+   *
+   * La presencia del sobre distingue dos estados que no son lo mismo:
+   *
+   * - **Sobre ausente o ilegible**: primer arranque, o almacenamiento corrupto.
+   *   Corresponde sembrar las cuentas de prueba.
+   * - **Sobre presente, incluso con la lista vacía**: estado legítimo en que el
+   *   Administrador eliminó todas las cuentas de Usuario. Sembrar acá
+   *   resucitaría cuentas que alguien eliminó a propósito.
    */
-  const cargarCuentas = (): Cuenta[] => {
+  const cargarCuentas = (): { cuentas: Cuenta[]; sembradas: boolean } => {
     const sobre = interpretar(leer(CLAVES_ALMACENAMIENTO.cuentas));
-    const crudas =
-      esRegistro(sobre) && Array.isArray(sobre.cuentas) ? sobre.cuentas : [];
-    const cuentas = crudas
+    const sobreUtilizable = esRegistro(sobre) && Array.isArray(sobre.cuentas);
+
+    if (!sobreUtilizable) {
+      return {
+        cuentas: [crearCuentaAdministrador(), ...semilla.map(crearCuenta)],
+        sembradas: semilla.length > 0,
+      };
+    }
+
+    const guardadas = (sobre.cuentas as unknown[])
       .map(deserializarCuenta)
       .filter((cuenta): cuenta is Cuenta => cuenta !== null)
-      .filter((cuenta) => cuenta.rol !== 'administrador');
-    return [crearCuentaAdministrador(), ...cuentas];
+      .filter((cuenta) => cuenta.correo !== CREDENCIALES_ADMINISTRADOR.correo);
+
+    return { cuentas: [crearCuentaAdministrador(), ...guardadas], sembradas: false };
   };
 
-  let cuentas: Cuenta[] = cargarCuentas();
+  const cargaInicial = cargarCuentas();
+  let cuentas: Cuenta[] = cargaInicial.cuentas;
 
   const persistirCuentas = (): void => {
     escribir(
@@ -196,6 +256,11 @@ export function crearServicioAutenticacion({
     );
   };
 
+  // La siembra se conserva con el mejor esfuerzo: `escribir` ya absorbe el
+  // fallo del medio, de modo que un almacenamiento caído deje las cuentas de
+  // prueba vivas en memoria durante la visita en lugar de impedir el arranque.
+  if (cargaInicial.sembradas) persistirCuentas();
+
   const persistirSesion = (sesion: Sesion): void => {
     escribir(CLAVES_ALMACENAMIENTO.sesion, JSON.stringify(sesion));
   };
@@ -203,6 +268,42 @@ export function crearServicioAutenticacion({
   /** Búsqueda por coincidencia exacta del correo (4.6). */
   const buscarPorCorreo = (correo: string): Cuenta | undefined =>
     cuentas.find((cuenta) => cuenta.correo === correo);
+
+  /** Proyecta una Cuenta a su resumen, descartando la contraseña. */
+  const resumir = (cuenta: Cuenta): ResumenCuenta => ({
+    id: cuenta.id,
+    nombre: cuenta.nombre,
+    correo: cuenta.correo,
+    rol: cuenta.rol,
+    idPlan: cuenta.idPlan,
+  });
+
+  /** Cuenta exigida por una operación de gestión, o `ErrorValidacion`. */
+  const exigirCuenta = (correo: string): Cuenta => {
+    const cuenta = buscarPorCorreo(correo);
+    if (cuenta === undefined) {
+      throw new ErrorValidacion({
+        correo: 'No existe una cuenta con ese correo',
+      });
+    }
+    return cuenta;
+  };
+
+  const esAdministradorPrincipal = (cuenta: Cuenta): boolean =>
+    cuenta.correo === CREDENCIALES_ADMINISTRADOR.correo;
+
+  const cantidadAdministradores = (): number =>
+    cuentas.filter((cuenta) => cuenta.rol === 'administrador').length;
+
+  /** Reemplaza una cuenta por su versión modificada y persiste el conjunto. */
+  const reemplazar = (cuenta: Cuenta, cambios: Partial<Cuenta>): Cuenta => {
+    const actualizada: Cuenta = { ...cuenta, ...cambios };
+    cuentas = cuentas.map((existente) =>
+      existente.correo === cuenta.correo ? actualizada : existente,
+    );
+    persistirCuentas();
+    return actualizada;
+  };
 
   return {
     async registrar({ nombre, correo, contrasenia, idPlan = null }) {
@@ -269,6 +370,67 @@ export function crearServicioAutenticacion({
     cuentaDe(correo) {
       const cuenta = buscarPorCorreo(correo);
       return cuenta === undefined ? null : { ...cuenta };
+    },
+
+    async listarCuentas() {
+      return cuentas.map(resumir);
+    },
+
+    async cambiarRol(correo, rol) {
+      if (!(ROLES as readonly string[]).includes(rol)) {
+        throw new ErrorValidacion({
+          rol: `El rol debe ser uno de ${ROLES.join(' o ')}`,
+        });
+      }
+
+      const cuenta = exigirCuenta(correo);
+
+      // El Administrador principal se reinyecta como administrador en cada
+      // lectura: degradarlo guardaría un rol que la próxima carga desmentiría.
+      if (esAdministradorPrincipal(cuenta) && rol !== 'administrador') {
+        throw new ErrorOperacionNoPermitida(
+          'No podés quitarle el rol de administrador a la cuenta principal',
+        );
+      }
+
+      // Sin ningún Administrador, nadie podría volver a gestionar la Plataforma.
+      if (
+        cuenta.rol === 'administrador' &&
+        rol !== 'administrador' &&
+        cantidadAdministradores() <= 1
+      ) {
+        throw new ErrorOperacionNoPermitida(
+          'La plataforma necesita al menos un administrador',
+        );
+      }
+
+      return resumir(reemplazar(cuenta, { rol }));
+    },
+
+    async cambiarPlan(correo, idPlan) {
+      const cuenta = exigirCuenta(correo);
+      return resumir(reemplazar(cuenta, { idPlan }));
+    },
+
+    async eliminarCuenta(correo) {
+      const cuenta = buscarPorCorreo(correo);
+      // Borrado idempotente: un correo ausente no altera nada.
+      if (cuenta === undefined) return;
+
+      if (esAdministradorPrincipal(cuenta)) {
+        throw new ErrorOperacionNoPermitida(
+          'No podés eliminar la cuenta del administrador principal',
+        );
+      }
+
+      if (cuenta.rol === 'administrador' && cantidadAdministradores() <= 1) {
+        throw new ErrorOperacionNoPermitida(
+          'La plataforma necesita al menos un administrador',
+        );
+      }
+
+      cuentas = cuentas.filter((existente) => existente.correo !== correo);
+      persistirCuentas();
     },
   };
 }

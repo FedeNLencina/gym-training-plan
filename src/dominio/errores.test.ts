@@ -13,6 +13,7 @@ import {
   ErrorCredenciales,
   ErrorDominio,
   ErrorEspacioInsuficiente,
+  ErrorOperacionNoPermitida,
   ErrorValidacion,
   ErrorVideoAusente,
   esErrorDominio,
@@ -48,6 +49,7 @@ describe('errores de dominio con nombre', () => {
     { Clase: ErrorEspacioInsuficiente, nombre: 'ErrorEspacioInsuficiente' },
     { Clase: ErrorVideoAusente, nombre: 'ErrorVideoAusente' },
     { Clase: ErrorCarga, nombre: 'ErrorCarga' },
+    { Clase: ErrorOperacionNoPermitida, nombre: 'ErrorOperacionNoPermitida' },
   ] as const;
 
   it.each(casos)(

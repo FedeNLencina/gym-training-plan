@@ -21,7 +21,7 @@
  *
  * Cubre: 6.1
  */
-import { useCallback, type ReactElement } from 'react';
+import { useCallback, useMemo, type ReactElement } from 'react';
 import { useParams } from 'react-router-dom';
 
 import BarraProgreso from '../componentes/reproductor/BarraProgreso';
@@ -30,8 +30,12 @@ import ResumenSesion from '../componentes/reproductor/ResumenSesion';
 import VisorVideo from '../componentes/reproductor/VisorVideo';
 import type { Entrenamiento } from '../dominio/modelos';
 import { usarServicios } from '../estado/ContextoServicios';
+import { usarSesion } from '../estado/ContextoSesion';
 import { usarCargaConPlazo } from '../estado/useEntrenamientos';
-import { useProgresoEntrenamiento } from '../estado/useProgresoEntrenamiento';
+import {
+  useProgresoEntrenamiento,
+  type PersistenciaProgreso,
+} from '../estado/useProgresoEntrenamiento';
 
 export const MENSAJE_SIN_EJERCICIOS =
   'Este entrenamiento no tiene ejercicios cargados';
@@ -116,8 +120,30 @@ function SesionEntrenamiento({
 }: {
   entrenamiento: Entrenamiento;
 }): ReactElement {
-  const { reloj } = usarServicios();
-  const progreso = useProgresoEntrenamiento(entrenamiento.ejercicios);
+  const { reloj, servicioProgreso } = usarServicios();
+  const { sesion } = usarSesion();
+
+  /**
+   * El avance se recuerda sólo cuando hay sesión y servicio: un Visitante sin
+   * cuenta no tiene dónde guardarlo, y su avance vive durante la visita.
+   */
+  const persistencia = useMemo<PersistenciaProgreso | null>(
+    () =>
+      servicioProgreso === null || sesion === null
+        ? null
+        : {
+            servicio: servicioProgreso,
+            correo: sesion.correo,
+            idEntrenamiento: entrenamiento.id,
+            tituloEntrenamiento: entrenamiento.titulo,
+          },
+    [servicioProgreso, sesion, entrenamiento.id, entrenamiento.titulo],
+  );
+
+  const progreso = useProgresoEntrenamiento(
+    entrenamiento.ejercicios,
+    persistencia,
+  );
   const sinEjercicios = entrenamiento.ejercicios.length === 0;
 
   return (

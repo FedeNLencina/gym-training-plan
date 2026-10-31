@@ -136,6 +136,48 @@ export type Sesion = {
   rol: Rol;
 };
 
+/**
+ * Avance persistido de un Entrenamiento para una cuenta. Guarda los
+ * identificadores de los Ejercicios marcados como completados, de modo que el
+ * Usuario recupere su avance al volver a abrir el Reproductor. El porcentaje no
+ * se guarda: se deriva de `completados` contra los Ejercicios vigentes, así un
+ * Entrenamiento editado por el Administrador no deja avances incoherentes.
+ */
+export type ProgresoEntrenamientoGuardado = {
+  idEntrenamiento: string;
+  completados: string[];
+  /** Marca de tiempo ISO de la última modificación del avance. */
+  actualizadoEn: string;
+};
+
+/**
+ * Sesión de entrenamiento terminada, tal como queda en el historial de la
+ * cuenta. Conserva el título del Entrenamiento al momento de completarse para
+ * que el historial siga siendo legible aunque luego se renombre o se elimine
+ * ese Entrenamiento.
+ */
+export type SesionCompletada = {
+  id: string;
+  idEntrenamiento: string;
+  tituloEntrenamiento: string;
+  /** Marca de tiempo ISO en que se completó la sesión. */
+  completadoEn: string;
+  ejerciciosCompletados: number;
+  ejerciciosTotales: number;
+};
+
+/**
+ * Todo lo que la Plataforma recuerda de una cuenta más allá de sus
+ * credenciales: el avance en curso de cada Entrenamiento y el historial de
+ * sesiones terminadas. Es la unidad de aislamiento entre Usuarios: el
+ * ServicioProgreso guarda una de estas por cuenta y nunca mezcla dos.
+ */
+export type ProgresoCuenta = {
+  /** Avance en curso, indexado por identificador de Entrenamiento. */
+  porEntrenamiento: Record<string, ProgresoEntrenamientoGuardado>;
+  historial: SesionCompletada[];
+};
+
 export type Beneficio = { titulo: string; descripcion: string };
 export type Testimonio = { nombre: string; texto: string };
 export type PreguntaFrecuente = { pregunta: string; respuesta: string };
@@ -239,4 +281,38 @@ export function crearCuenta(datos: Borrador<Cuenta> = {}): Cuenta {
 /** Proyecta una Cuenta a su Sesion, descartando la contraseña. */
 export function crearSesion(cuenta: Cuenta): Sesion {
   return { correo: cuenta.correo, nombre: cuenta.nombre, rol: cuenta.rol };
+}
+
+export function crearProgresoEntrenamientoGuardado(
+  datos: Borrador<ProgresoEntrenamientoGuardado> = {},
+): ProgresoEntrenamientoGuardado {
+  return {
+    idEntrenamiento: datos.idEntrenamiento ?? '',
+    // Se descartan los duplicados: el avance es un conjunto de Ejercicios, y
+    // un identificador repetido inflaría el recuento de completados.
+    completados: [...new Set(datos.completados ?? [])],
+    actualizadoEn: datos.actualizadoEn ?? new Date(0).toISOString(),
+  };
+}
+
+export function crearProgresoCuenta(
+  datos: Borrador<ProgresoCuenta> = {},
+): ProgresoCuenta {
+  return {
+    porEntrenamiento: { ...(datos.porEntrenamiento ?? {}) },
+    historial: [...(datos.historial ?? [])],
+  };
+}
+
+export function crearSesionCompletada(
+  datos: Borrador<SesionCompletada> = {},
+): SesionCompletada {
+  return {
+    id: datos.id ?? crearIdentificador(),
+    idEntrenamiento: datos.idEntrenamiento ?? '',
+    tituloEntrenamiento: datos.tituloEntrenamiento ?? '',
+    completadoEn: datos.completadoEn ?? new Date(0).toISOString(),
+    ejerciciosCompletados: datos.ejerciciosCompletados ?? 0,
+    ejerciciosTotales: datos.ejerciciosTotales ?? 0,
+  };
 }

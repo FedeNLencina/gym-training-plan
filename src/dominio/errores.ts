@@ -18,6 +18,7 @@ export const NOMBRES_ERROR_DOMINIO = Object.freeze([
   'ErrorEspacioInsuficiente',
   'ErrorVideoAusente',
   'ErrorCarga',
+  'ErrorOperacionNoPermitida',
 ] as const);
 
 export type NombreErrorDominio = (typeof NOMBRES_ERROR_DOMINIO)[number];
@@ -96,6 +97,20 @@ export class ErrorVideoAusente extends ErrorDominio {
 export class ErrorCarga extends ErrorDominio {
   constructor(mensaje = 'No pudimos cargar los datos') {
     super('ErrorCarga', mensaje);
+  }
+}
+
+/**
+ * Operación válida en su forma pero prohibida por una regla de la Plataforma.
+ *
+ * Se distingue de `ErrorValidacion` porque no hay ningún campo que corregir: el
+ * dato está bien formado y la negativa viene de una invariante del sistema. Lo
+ * usa la gestión de cuentas del Panel_Admin para impedir que la Plataforma
+ * quede sin ningún Administrador.
+ */
+export class ErrorOperacionNoPermitida extends ErrorDominio {
+  constructor(mensaje = 'No podés realizar esta operación') {
+    super('ErrorOperacionNoPermitida', mensaje);
   }
 }
 

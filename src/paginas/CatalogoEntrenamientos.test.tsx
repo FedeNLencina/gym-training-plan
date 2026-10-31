@@ -23,9 +23,11 @@ import { describe, expect, it } from 'vitest';
 import { crearEntrenamiento, type Entrenamiento } from '../dominio/modelos';
 import type { Sesion } from '../dominio/modelos';
 import { ProveedorServicios } from '../estado/ContextoServicios';
-import { ProveedorSesion } from '../estado/ContextoSesion';
+import {
+  ProveedorSesion,
+  type ServicioDeSesion,
+} from '../estado/ContextoSesion';
 import { PLAZO_CARGA_MS } from '../estado/useEntrenamientos';
-import type { ServicioAutenticacion } from '../servicios/servicioAutenticacion';
 import { crearRelojFalso } from '../tests/dobles/relojFalso';
 import { crearRepositorioEnMemoria } from '../tests/dobles/repositorioEnMemoria';
 import CatalogoEntrenamientos from './CatalogoEntrenamientos';
@@ -36,7 +38,7 @@ const SESION_USUARIO: Sesion = {
   rol: 'usuario',
 };
 
-function servicioConSesion(sesion: Sesion | null): ServicioAutenticacion {
+function servicioConSesion(sesion: Sesion | null): ServicioDeSesion {
   return {
     async registrar() {
       throw new Error('no usado');

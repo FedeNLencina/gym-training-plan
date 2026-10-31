@@ -17,10 +17,13 @@ import { MemoryRouter } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
 
 import { HERO_LANDING } from '../datos/heroLanding';
+import { MENSAJE_CARGANDO } from '../paginas/ReproductorEntrenamiento';
 import { ProveedorAvisos } from '../estado/ContextoAvisos';
 import { ProveedorServicios } from '../estado/ContextoServicios';
-import { ProveedorSesion } from '../estado/ContextoSesion';
-import type { ServicioAutenticacion } from '../servicios/servicioAutenticacion';
+import {
+  ProveedorSesion,
+  type ServicioDeSesion,
+} from '../estado/ContextoSesion';
 import { crearRelojFalso } from '../tests/dobles/relojFalso';
 import { crearRepositorioEnMemoria } from '../tests/dobles/repositorioEnMemoria';
 import { ArbolRutas, RUTAS } from './definicionRutas';
@@ -30,7 +33,7 @@ import { ArbolRutas, RUTAS } from './definicionRutas';
  * la sesión, de modo que el árbol se monta bajo el proveedor de sesión (sin
  * sesión activa) y el de avisos, tal como los compone `App`.
  */
-const servicioSinSesion: ServicioAutenticacion = {
+const servicioSinSesion: ServicioDeSesion = {
   async registrar() {
     throw new Error('no usado');
   },
@@ -84,11 +87,14 @@ describe('Árbol de rutas', () => {
 
   it('Dado la dirección del detalle de un Entrenamiento, Cuando la Plataforma la resuelve, Entonces presenta la vista del Reproductor', () => {
     // Cubre: 2.12
+    // La dirección monta el Reproductor real, que arranca solicitando el
+    // Entrenamiento al Repositorio_Datos: lo que identifica a la vista en el
+    // primer render es su indicador de carga, no un encabezado.
     entrarEn('/entrenamientos/abc-123');
 
-    expect(
-      screen.getByRole('heading', { name: 'Reproductor de entrenamiento' }),
-    ).toBeInTheDocument();
+    // Por texto y no por rol `status`: la región de avisos de `LayoutPublico`
+    // también expone ese rol, de modo que el rol solo es ambiguo acá.
+    expect(screen.getByText(MENSAJE_CARGANDO)).toBeInTheDocument();
   });
 
   it('Dado la dirección de registro, Cuando la Plataforma la resuelve, Entonces presenta la vista de Registro', () => {

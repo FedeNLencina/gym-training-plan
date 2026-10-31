@@ -24,9 +24,11 @@ import { crearSesion, type Sesion } from '../dominio/modelos';
 import type {
   Credenciales,
   DatosRegistro,
-  ServicioAutenticacion,
 } from '../servicios/servicioAutenticacion';
-import { ProveedorSesion } from '../estado/ContextoSesion';
+import {
+  ProveedorSesion,
+  type ServicioDeSesion,
+} from '../estado/ContextoSesion';
 import { ProveedorAvisos } from '../estado/ContextoAvisos';
 import { crearCuenta } from '../dominio/modelos';
 import LayoutPublico from './LayoutPublico';
@@ -34,11 +36,11 @@ import LayoutPublico from './LayoutPublico';
 // --- Doble del ServicioAutenticacion ----------------------------------------
 
 function crearServicioFalso(sesionPersistida: Sesion | null): {
-  servicio: ServicioAutenticacion;
+  servicio: ServicioDeSesion;
   cierres: () => number;
 } {
   let cierres = 0;
-  const servicio: ServicioAutenticacion = {
+  const servicio: ServicioDeSesion = {
     async registrar({ nombre, correo, idPlan = null }: DatosRegistro) {
       return crearSesion(crearCuenta({ nombre, correo, rol: 'usuario', idPlan }));
     },

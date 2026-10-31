@@ -18,9 +18,36 @@ import { describe, expect, it } from 'vitest';
 
 import { crearEjercicio, crearEntrenamiento } from '../dominio/modelos';
 import { ProveedorServicios } from '../estado/ContextoServicios';
+import {
+  ProveedorSesion,
+  type ServicioDeSesion,
+} from '../estado/ContextoSesion';
 import { crearRelojFalso } from '../tests/dobles/relojFalso';
 import { crearRepositorioEnMemoria } from '../tests/dobles/repositorioEnMemoria';
 import ReproductorEntrenamiento from './ReproductorEntrenamiento';
+
+/**
+ * Doble mínimo del servicio de sesión: el Reproductor consulta la sesión activa
+ * para saber de quién es el avance que recuerda. Estos tests ejercitan la
+ * presentación del Entrenamiento, no la persistencia del avance —que vive en
+ * `useProgresoEntrenamiento.persistencia.test`—, así que alcanza con un
+ * Visitante sin sesión.
+ */
+const servicioSinSesion: ServicioDeSesion = {
+  async registrar() {
+    throw new Error('no usado');
+  },
+  async ingresar() {
+    throw new Error('no usado');
+  },
+  async cerrarSesion() {},
+  async restaurarSesion() {
+    return null;
+  },
+  cuentaDe() {
+    return null;
+  },
+};
 
 type OpcionesRender = {
   repositorio?: ReturnType<typeof crearRepositorioEnMemoria>;
@@ -38,14 +65,16 @@ function renderizar({
 } {
   render(
     <MemoryRouter initialEntries={[ruta]}>
-      <ProveedorServicios repositorio={repositorio} reloj={reloj}>
-        <Routes>
-          <Route
-            path="/entrenamientos/:id"
-            element={<ReproductorEntrenamiento />}
-          />
-        </Routes>
-      </ProveedorServicios>
+      <ProveedorSesion servicio={servicioSinSesion}>
+        <ProveedorServicios repositorio={repositorio} reloj={reloj}>
+          <Routes>
+            <Route
+              path="/entrenamientos/:id"
+              element={<ReproductorEntrenamiento />}
+            />
+          </Routes>
+        </ProveedorServicios>
+      </ProveedorSesion>
     </MemoryRouter>,
   );
   return { repositorio, reloj };

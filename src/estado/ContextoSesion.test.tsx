@@ -20,13 +20,16 @@ import { crearCuenta, crearSesion, type Sesion } from '../dominio/modelos';
 import type {
   Credenciales,
   DatosRegistro,
-  ServicioAutenticacion,
 } from '../servicios/servicioAutenticacion';
-import { ProveedorSesion, usarSesion } from './ContextoSesion';
+import {
+  ProveedorSesion,
+  usarSesion,
+  type ServicioDeSesion,
+} from './ContextoSesion';
 
 // --- Doble del ServicioAutenticacion ----------------------------------------
 
-type ServicioFalso = ServicioAutenticacion & {
+type ServicioFalso = ServicioDeSesion & {
   /** Resuelve la restauración diferida con la sesión configurada. */
   resolverRestauracion: () => void;
   /** Cantidad de cierres de sesión solicitados. */
@@ -163,7 +166,7 @@ function Observador(): ReactElement {
   );
 }
 
-function montar(servicio: ServicioAutenticacion): void {
+function montar(servicio: ServicioDeSesion): void {
   render(
     <ProveedorSesion servicio={servicio}>
       <Observador />
