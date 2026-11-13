@@ -1,8 +1,6 @@
 ---
-paths:
-  - "src/**/*.tsx"
-  - "src/**/*.css"
-  - "index.html"
+name: theme
+description: Paleta y tokens de diseño oficiales de Atlas Gym (negro, blanco y rojo carmesí; sin naranjas). Activar al crear o modificar interfaz, estilos, CSS, colores o componentes visuales del proyecto.
 ---
 
 # Sistema de Diseño y Paleta de Colores (Atlas Gym Theme Oficial)
