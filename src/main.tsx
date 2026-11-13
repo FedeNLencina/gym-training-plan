@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import './estilos/variables.css';
 import './estilos/global.css';
-import './estilos/components.css';
 
 const contenedorRaiz = document.getElementById('root');
 
