@@ -14,7 +14,8 @@
  * La vista raíz ya monta la `Landing_Page` real (tarea 13.1), las direcciones
  * de registro e ingreso montan las vistas reales `Registro` e `Ingresar`
  * (tarea 14.1), el catálogo monta la vista real `CatalogoEntrenamientos`
- * (tarea 15.1), el detalle monta el `ReproductorEntrenamiento` real y `/admin`
+ * (tarea 15.1), el detalle monta el `ReproductorEntrenamiento` real tras la
+ * guarda `RutaProtegida`, que exige sesión activa (2.13, 6.8), y `/admin`
  * monta el `PanelAdmin` real tras la guarda `RutaProtegida` que exige rol
  * administrador (tarea 18.1, criterios 7.2 y 7.8). Lo que estas rutas fijan y
  * prueban es que cada dirección declarada resuelve a su vista o a su
@@ -71,7 +72,11 @@ export function ArbolRutas(): ReactElement {
         <Route path="entrenamientos" element={<CatalogoEntrenamientos />} />
         <Route
           path="entrenamientos/:id"
-          element={<ReproductorEntrenamiento />}
+          element={
+            <RutaProtegida>
+              <ReproductorEntrenamiento />
+            </RutaProtegida>
+          }
         />
         <Route path="registro" element={<Registro />} />
         <Route path="ingresar" element={<Ingresar />} />

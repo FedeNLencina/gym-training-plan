@@ -49,10 +49,21 @@ const servicioSinSesion: ServicioDeSesion = {
   },
 };
 
-function entrarEn(direccion: string): void {
+/** Doble con una sesión de rol Usuario ya restaurable desde el navegador. */
+const servicioConSesion: ServicioDeSesion = {
+  ...servicioSinSesion,
+  async restaurarSesion() {
+    return { correo: 'ana@atlasgym.com', nombre: 'Ana Pérez', rol: 'usuario' };
+  },
+};
+
+function entrarEn(
+  direccion: string,
+  servicio: ServicioDeSesion = servicioSinSesion,
+): void {
   render(
     <MemoryRouter initialEntries={[direccion]}>
-      <ProveedorSesion servicio={servicioSinSesion}>
+      <ProveedorSesion servicio={servicio}>
         <ProveedorServicios
           repositorio={crearRepositorioEnMemoria()}
           reloj={crearRelojFalso()}
@@ -85,16 +96,34 @@ describe('Árbol de rutas', () => {
     ).toBeInTheDocument();
   });
 
-  it('Dado la dirección del detalle de un Entrenamiento, Cuando la Plataforma la resuelve, Entonces presenta la vista del Reproductor', () => {
+  it('Dado un Usuario con sesión Cuando la Plataforma resuelve la dirección del detalle de un Entrenamiento Entonces presenta la vista del Reproductor', async () => {
     // Cubre: 2.12
     // La dirección monta el Reproductor real, que arranca solicitando el
     // Entrenamiento al Repositorio_Datos: lo que identifica a la vista en el
     // primer render es su indicador de carga, no un encabezado.
-    entrarEn('/entrenamientos/abc-123');
+    entrarEn('/entrenamientos/abc-123', servicioConSesion);
 
     // Por texto y no por rol `status`: la región de avisos de `LayoutPublico`
     // también expone ese rol, de modo que el rol solo es ambiguo acá.
-    expect(screen.getByText(MENSAJE_CARGANDO)).toBeInTheDocument();
+    expect(await screen.findByText(MENSAJE_CARGANDO)).toBeInTheDocument();
+  });
+
+  it('Dado un Visitante sin sesión Cuando la Plataforma resuelve la dirección del detalle de un Entrenamiento Entonces redirige a la vista de ingreso', async () => {
+    // Cubre: 2.13, 6.8
+    entrarEn('/entrenamientos/abc-123');
+
+    expect(
+      await screen.findByRole('heading', { name: 'Iniciar sesión' }),
+    ).toBeInTheDocument();
+  });
+
+  it('Dado un Visitante sin sesión Cuando la Plataforma lo redirige desde el detalle de un Entrenamiento Entonces presenta el aviso "Iniciá sesión para continuar"', async () => {
+    // Cubre: 2.13, 6.8
+    entrarEn('/entrenamientos/abc-123');
+
+    expect(
+      await screen.findByText('Iniciá sesión para continuar'),
+    ).toBeInTheDocument();
   });
 
   it('Dado la dirección de registro, Cuando la Plataforma la resuelve, Entonces presenta la vista de Registro', () => {
