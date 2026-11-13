@@ -46,6 +46,11 @@
 }
 
 html {
+  /* Controles nativos (selects, radios, selector de archivo) en su versión
+     oscura y con el rojo de marca, en lugar de los valores del navegador. */
+  color-scheme: dark;
+  accent-color: var(--primary);
+  caret-color: var(--primary-vibrant);
   -webkit-text-size-adjust: 100%;
   /* La Navbar adhesiva no debe tapar el destino de los anclajes (#planes). */
   scroll-padding-top: calc(var(--alto-navbar) + var(--espacio-md));
@@ -147,6 +152,11 @@ small {
   /* Texto pequeño: nunca sobre --primary, siempre sobre fondo oscuro (9.2) */
   font-size: 0.875rem;
   color: var(--text-muted);
+}
+
+::placeholder {
+  color: var(--text-muted);
+  opacity: 1;
 }
 
 /* ---------- Contenedor ---------- */

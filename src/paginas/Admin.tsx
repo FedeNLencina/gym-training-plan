@@ -1,4 +1,5 @@
-import { useState, type ReactElement } from 'react';
+import type { ReactElement } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import AdminContenido from '../componentes/admin/AdminContenido';
 import AdminEntrenamientos from '../componentes/admin/AdminEntrenamientos';
@@ -13,11 +14,13 @@ const SECCIONES = [
 ] as const;
 
 export default function Admin(): ReactElement {
-  const [activa, setActiva] = useState<(typeof SECCIONES)[number]['clave']>('entrenamientos');
-  const { Panel } = SECCIONES.find((s) => s.clave === activa) ?? SECCIONES[0];
+  // La sección activa vive en la dirección: se conserva al recargar y se puede enlazar.
+  const [parametros, setParametros] = useSearchParams();
+  const { clave: activa, Panel } =
+    SECCIONES.find((s) => s.clave === parametros.get('seccion')) ?? SECCIONES[0];
 
   return (
-    <section className="seccion contenedor">
+    <section className="seccion seccion--app contenedor">
       <h1>Administración</h1>
       <div className="pestanias" role="tablist" aria-label="Secciones de administración">
         {SECCIONES.map(({ clave, texto }) => (
@@ -29,7 +32,7 @@ export default function Admin(): ReactElement {
             className="pestanias__pestania"
             aria-selected={activa === clave}
             aria-controls="panel-admin"
-            onClick={() => setActiva(clave)}
+            onClick={() => setParametros({ seccion: clave }, { replace: true })}
           >
             {texto}
           </button>

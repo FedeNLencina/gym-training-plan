@@ -24,8 +24,8 @@
   min-height: var(--area-activa-min);
   padding: var(--espacio-sm) var(--espacio-lg);
   border-radius: var(--radio-sm);
-  /* ≥ 18 px permite texto blanco sobre --primary con contraste 3:1 */
-  font-size: 1.125rem;
+  /* 19 px en negrita cuenta como texto grande: blanco sobre --primary da 4,36:1 */
+  font-size: 1.1875rem;
   font-weight: 700;
   font-family: var(--fuente-display);
   letter-spacing: 0.01em;
@@ -89,6 +89,11 @@
 .boton--compacto {
   padding-inline: var(--espacio-md);
   font-size: 0.9375rem;
+}
+
+/* El texto chico sobre rojo necesita el rojo más profundo para llegar a 4,5:1. */
+.boton-primario.boton--compacto {
+  background-color: var(--primary-hover);
 }
 
 /* ---------- Formularios ---------- */
@@ -352,7 +357,7 @@
 }
 
 .auth-error {
-  color: var(--text-accent);
+  color: var(--primary-vibrant);
   font-size: 0.8125rem;
   font-weight: 600;
 }
@@ -394,7 +399,7 @@
 }
 
 .auth-enlace {
-  color: var(--text-accent);
+  color: var(--primary-vibrant);
   font-weight: 700;
   text-decoration: underline;
   text-underline-offset: 4px;
@@ -402,7 +407,7 @@
 }
 
 .auth-enlace:hover {
-  color: var(--primary-vibrant);
+  color: var(--text-main);
 }
 
 
@@ -554,7 +559,7 @@
 }
 
 .pie__texto {
-  color: var(--text-dimmed);
+  color: var(--text-muted);
   font-size: 0.875rem;
 }
 
@@ -576,6 +581,10 @@
 .seccion > h2,
 .seccion > .contenedor > h2 {
   margin-bottom: var(--espacio-md);
+}
+
+.seccion--app > h1 {
+  font-size: clamp(1.75rem, 5vw, 2.75rem);
 }
 
 .seccion__bajada {
@@ -632,60 +641,91 @@
   margin-top: var(--espacio-lg);
 }
 
-/* Escalera de niveles: tres escalones de altura creciente. Es la figura de la
-   página: muestra de un vistazo que el recorrido es una progresión. */
+/* Escalera de niveles: tres escalones de altura creciente, uno por nivel. Es
+   la figura de la página y también su acción: cada escalón lleva a los planes. */
 .escalera {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: end;
   gap: var(--espacio-sm);
-  height: 14rem;
+  height: 15rem;
+  /* Los escalones suben desde abajo del piso al cargar la página. */
+  overflow: hidden;
 }
 
 .escalera__escalon {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: var(--espacio-md);
-  border: 1px solid var(--border-accent);
-  border-bottom: none;
-  border-radius: var(--radio-sm) var(--radio-sm) 0 0;
+  /* El rótulo del nivel se mide contra el ancho del propio escalón. */
+  container-type: inline-size;
+  animation: escalon-sube 800ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  animation-delay: calc(var(--orden) * 110ms);
 }
 
 .escalera__escalon--basico {
-  height: 45%;
-  background-color: var(--bg-surface-elevated);
+  height: 46%;
 }
 
 .escalera__escalon--intermedio {
-  height: 72%;
-  background-color: var(--primary-deep);
+  height: 73%;
 }
 
 .escalera__escalon--avanzado {
   height: 100%;
-  background-color: var(--primary);
-  box-shadow: var(--shadow-glow);
 }
 
-.escalera__cantidad {
-  font-family: var(--fuente-display);
-  font-size: clamp(1.75rem, 6vw, 3rem);
-  font-weight: 900;
-  line-height: 1;
+@keyframes escalon-sube {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+.escalera__enlace {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-xs);
+  height: 100%;
+  padding: var(--espacio-sm);
+  border: 1px solid var(--border-accent);
+  border-bottom: none;
+  border-radius: var(--radio-sm) var(--radio-sm) 0 0;
+  color: var(--text-main);
+  transition: border-color 150ms ease, filter 150ms ease;
+}
+
+.escalera__enlace:hover {
+  border-color: var(--text-main);
+  color: var(--text-main);
+  filter: brightness(1.15);
+}
+
+.escalera__escalon--basico .escalera__enlace {
+  background-color: var(--bg-surface-elevated);
+}
+
+.escalera__escalon--intermedio .escalera__enlace {
+  background-color: var(--primary-deep);
+}
+
+.escalera__escalon--avanzado .escalera__enlace {
+  background-color: var(--primary-hover);
 }
 
 .escalera__nivel {
-  font-size: 0.875rem;
-  font-weight: 700;
+  font-family: var(--fuente-display);
+  font-size: clamp(0.75rem, 10.5cqi, 1.5rem);
+  font-weight: 900;
+  line-height: 1.1;
+  text-transform: uppercase;
 }
 
-.escalera__unidad {
-  display: block;
-  color: inherit;
-  font-size: 0.75rem;
-  font-weight: 500;
-  opacity: 0.8;
+.escalera__dato {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.3;
+  font-variant-numeric: tabular-nums;
+}
+
+.escalera__precio {
+  margin-top: auto;
 }
 
 @media (min-width: 768px) {
@@ -701,6 +741,14 @@
 
   .escalera {
     height: 22rem;
+  }
+
+  .escalera__enlace {
+    padding: var(--espacio-md);
+  }
+
+  .escalera__dato {
+    font-size: 0.9375rem;
   }
 }
 
@@ -805,8 +853,7 @@
 }
 
 .plan--activo {
-  border-color: var(--border-accent-hover);
-  box-shadow: var(--shadow-glow);
+  border-color: var(--primary);
 }
 
 .plan__cabecera {
@@ -822,6 +869,7 @@
 }
 
 .plan__precio {
+  font-variant-numeric: tabular-nums;
   font-family: var(--fuente-display);
   font-size: 2.25rem;
   font-weight: 900;
@@ -845,8 +893,15 @@
 }
 
 .plan__beneficios li {
-  padding-left: var(--espacio-md);
-  border-left: 2px solid var(--primary);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--espacio-sm);
+}
+
+.plan__beneficios svg {
+  flex-shrink: 0;
+  margin-top: 0.3em;
+  color: var(--primary-vibrant);
 }
 
 .plan__pie {
@@ -865,7 +920,7 @@
 }
 
 .plan__estado--activo {
-  color: var(--text-accent);
+  color: var(--primary-vibrant);
 }
 
 .plan__nota {
@@ -907,15 +962,19 @@
   display: none;
 }
 
-.preguntas__item summary::after {
-  content: '+';
-  color: var(--text-accent);
-  font-size: 1.5rem;
-  line-height: 1;
+.preguntas__item summary:hover {
+  color: var(--primary-vibrant);
 }
 
-.preguntas__item[open] summary::after {
-  content: '−';
+.preguntas__item summary svg {
+  flex-shrink: 0;
+  color: var(--primary-vibrant);
+  transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* El más gira hasta quedar como una cruz de cerrar. */
+.preguntas__item[open] summary svg {
+  transform: rotate(45deg);
 }
 
 .preguntas__item p {
@@ -950,35 +1009,19 @@
 
 .filtros__opcion[aria-pressed='true'] {
   border-color: var(--primary);
-  background-color: var(--primary);
+  background-color: var(--primary-deep);
   color: var(--text-main);
 }
 
-.grilla-entrenamientos {
-  display: grid;
-  gap: var(--espacio-md);
+.lista-entrenamientos {
+  border-top: 1px solid var(--border-subtle);
 }
 
 .entrenamiento {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  display: grid;
   gap: var(--espacio-sm);
-  padding: var(--espacio-lg);
-  border: 1px solid var(--border-subtle);
-  border-left: 3px solid var(--primary);
-  border-radius: var(--radio-sm);
-  background-color: var(--bg-surface);
-}
-
-.entrenamiento--bloqueado {
-  border-left-color: var(--text-dimmed);
-  background-color: transparent;
-}
-
-.entrenamiento--bloqueado .entrenamiento__titulo,
-.entrenamiento--bloqueado .entrenamiento__descripcion {
-  color: var(--text-dimmed);
+  padding-block: var(--espacio-lg);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .entrenamiento__meta {
@@ -994,6 +1037,7 @@
   gap: var(--espacio-xs);
   color: var(--text-muted);
   font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
 }
 
 .entrenamiento__titulo {
@@ -1002,8 +1046,17 @@
 }
 
 .entrenamiento__descripcion {
-  flex: 1;
+  max-width: 65ch;
+  margin-top: var(--espacio-xs);
   color: var(--text-muted);
+}
+
+.entrenamiento--bloqueado .entrenamiento__titulo {
+  color: var(--text-muted);
+}
+
+.entrenamiento__accion {
+  justify-self: start;
 }
 
 .entrenamiento__bloqueo {
@@ -1020,8 +1073,25 @@
 }
 
 @media (min-width: 768px) {
-  .grilla-entrenamientos {
-    grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+  .entrenamiento {
+    grid-template-columns: 9rem 1fr 15rem;
+    align-items: center;
+    gap: var(--espacio-lg);
+  }
+
+  .entrenamiento > .entrenamiento__meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--espacio-xs);
+  }
+
+  .entrenamiento__accion {
+    justify-self: end;
+  }
+
+  .entrenamiento__bloqueo {
+    justify-content: flex-end;
+    text-align: right;
   }
 }
 
@@ -1032,6 +1102,9 @@
   flex-direction: column;
   align-items: flex-start;
   gap: var(--espacio-md);
+}
+
+.detalle > .visor {
   max-width: 60rem;
 }
 
@@ -1078,7 +1151,6 @@
 
 .pestanias__pestania {
   min-height: var(--area-activa-min);
-  margin-bottom: -1px;
   border-bottom: 2px solid transparent;
   color: var(--text-muted);
   font-family: var(--fuente-display);
@@ -1121,6 +1193,7 @@
 
 .tabla {
   width: 100%;
+  font-variant-numeric: tabular-nums;
   border-collapse: collapse;
   text-align: left;
 }
@@ -1166,12 +1239,77 @@ td.tabla__acciones > * + * {
 }
 
 .tabla__vacio {
-  color: var(--text-dimmed);
+  color: var(--text-muted);
 }
 
 .tabla__pendiente {
   color: var(--text-accent);
   font-weight: 700;
+}
+
+/* En pantallas angostas cada fila se apila como una ficha, para que las
+   acciones (dar de alta, editar) no queden fuera de la vista. */
+@media (max-width: 767px) {
+  .tabla thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .tabla,
+  .tabla tbody,
+  .tabla tr,
+  .tabla th,
+  .tabla td {
+    display: block;
+  }
+
+  .tabla tr {
+    padding: var(--espacio-md);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .tabla tbody tr:last-child {
+    border-bottom: none;
+  }
+
+  .tabla tbody th,
+  .tabla tbody td {
+    padding: var(--espacio-xs) 0;
+    border: none;
+  }
+
+  .tabla tbody th {
+    font-size: 1.125rem;
+  }
+
+  .tabla td[data-etiqueta]::before {
+    content: attr(data-etiqueta);
+    display: block;
+    color: var(--text-muted);
+    font-size: 0.8125rem;
+    font-weight: 600;
+  }
+
+  .tabla td:empty {
+    display: none;
+  }
+
+  td.tabla__acciones {
+    display: flex;
+    padding-top: var(--espacio-sm);
+    white-space: normal;
+  }
+
+  td.tabla__acciones > * + * {
+    margin-left: 0;
+  }
+
+  .tabla select.campo__control {
+    width: 100%;
+  }
 }
 
 .formulario {

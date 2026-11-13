@@ -1,14 +1,16 @@
-import type { ReactElement } from 'react';
+import { Plus } from 'lucide-react';
+import type { CSSProperties, ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 
 import TarjetaPlan from '../componentes/TarjetaPlan';
 import { ETIQUETA_NIVEL, NIVELES } from '../dominio/modelos';
-import { ordenarPorPrecio } from '../dominio/reglas';
+import { formatearPrecio, ordenarPorPrecio } from '../dominio/reglas';
 import { usarApp } from '../estado/ContextoApp';
 import { RUTAS } from '../rutas/rutas';
 
 export default function Inicio(): ReactElement {
   const { contenido, planes, entrenamientos, cuenta } = usarApp();
+  const planesOrdenados = ordenarPorPrecio(planes);
 
   return (
     <>
@@ -33,19 +35,32 @@ export default function Inicio(): ReactElement {
             </div>
           </div>
 
-          {/* La escalera de niveles: cuántos entrenamientos hay en cada escalón. */}
-          <ol className="escalera" aria-label="Entrenamientos por nivel">
-            {NIVELES.map((nivel) => (
-              <li key={nivel} className={`escalera__escalon escalera__escalon--${nivel}`}>
-                <span className="escalera__cantidad">
-                  {entrenamientos.filter((e) => e.nivel === nivel).length}
-                </span>
-                <span className="escalera__nivel">
-                  {ETIQUETA_NIVEL[nivel]}
-                  <small className="escalera__unidad">rutinas</small>
-                </span>
-              </li>
-            ))}
+          {/* La escalera de niveles: cada escalón muestra qué hay en ese nivel
+              y cuánto cuesta, y lleva a elegir el plan. */}
+          <ol className="escalera" aria-label="Niveles de entrenamiento">
+            {NIVELES.map((nivel, orden) => {
+              const rutinas = entrenamientos.filter((e) => e.nivel === nivel).length;
+              const plan = planesOrdenados.find((p) => p.nivel === nivel);
+              return (
+                <li
+                  key={nivel}
+                  className={`escalera__escalon escalera__escalon--${nivel}`}
+                  style={{ '--orden': orden } as CSSProperties}
+                >
+                  <Link to={RUTAS.planes} className="escalera__enlace">
+                    <span className="escalera__nivel">{ETIQUETA_NIVEL[nivel]}</span>
+                    <span className="escalera__dato">
+                      {rutinas} {rutinas === 1 ? 'rutina' : 'rutinas'}
+                    </span>
+                    {plan !== undefined && (
+                      <span className="escalera__dato escalera__precio">
+                        {formatearPrecio(plan.precio)} por mes
+                      </span>
+                    )}
+                  </Link>
+                </li>
+              );
+            })}
           </ol>
         </div>
       </section>
@@ -69,7 +84,7 @@ export default function Inicio(): ReactElement {
             Tres niveles. Empezás donde estás y cambiás de plan cuando quieras.
           </p>
           <div className="grilla-planes">
-            {ordenarPorPrecio(planes).map((plan) => (
+            {planesOrdenados.map((plan) => (
               <TarjetaPlan key={plan.id} plan={plan} />
             ))}
           </div>
@@ -84,7 +99,10 @@ export default function Inicio(): ReactElement {
         <div className="preguntas">
           {contenido.preguntas.map((item, indice) => (
             <details key={indice} className="preguntas__item">
-              <summary>{item.pregunta}</summary>
+              <summary>
+                {item.pregunta}
+                <Plus size={20} aria-hidden="true" />
+              </summary>
               <p>{item.respuesta}</p>
             </details>
           ))}

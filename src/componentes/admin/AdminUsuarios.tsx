@@ -41,8 +41,8 @@ export default function AdminUsuarios(): ReactElement {
               return (
                 <tr key={c.id}>
                   <th scope="row">{c.nombre}</th>
-                  <td>{c.correo}</td>
-                  <td>
+                  <td data-etiqueta="Correo">{c.correo}</td>
+                  <td data-etiqueta="Plan activo">
                     {esAdmin ? (
                       'Administrador'
                     ) : (
@@ -56,7 +56,7 @@ export default function AdminUsuarios(): ReactElement {
                       </select>
                     )}
                   </td>
-                  <td>
+                  <td data-etiqueta="Solicitud">
                     {c.idPlanSolicitado === null ? (
                       <span className="tabla__vacio">Sin solicitud</span>
                     ) : (
@@ -69,7 +69,7 @@ export default function AdminUsuarios(): ReactElement {
                       </div>
                     )}
                   </td>
-                  <td>
+                  <td className="tabla__acciones">
                     {c.id !== propia?.id && c.id !== ID_ADMIN_PRINCIPAL && (
                       <button type="button" className="boton-secundario boton--compacto"
                         onClick={() => eliminar(c)}>Eliminar</button>

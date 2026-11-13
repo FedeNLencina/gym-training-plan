@@ -19,7 +19,7 @@ export default function Entrenamientos(): ReactElement {
   const visibles = filtrarPorNivel(entrenamientos, filtro);
 
   return (
-    <section className="seccion contenedor">
+    <section className="seccion seccion--app contenedor">
       <h1>Entrenamientos</h1>
 
       {acceso === null && (
@@ -49,7 +49,7 @@ export default function Entrenamientos(): ReactElement {
       {visibles.length === 0 ? (
         <p className="mensaje">No hay entrenamientos en esta categoría.</p>
       ) : (
-        <div className="grilla-entrenamientos">
+        <div className="lista-entrenamientos">
           {visibles.map((entrenamiento) => {
             const habilitado = puedeVer(acceso, entrenamiento.nivel);
             return (
@@ -65,10 +65,15 @@ export default function Entrenamientos(): ReactElement {
                     {entrenamiento.duracionMin} min
                   </span>
                 </div>
-                <h2 className="entrenamiento__titulo">{entrenamiento.titulo}</h2>
-                <p className="entrenamiento__descripcion">{entrenamiento.descripcion}</p>
+                <div>
+                  <h2 className="entrenamiento__titulo">{entrenamiento.titulo}</h2>
+                  <p className="entrenamiento__descripcion">{entrenamiento.descripcion}</p>
+                </div>
                 {habilitado ? (
-                  <Link to={RUTAS.entrenamiento(entrenamiento.id)} className="boton-primario boton--compacto">
+                  <Link
+                    to={RUTAS.entrenamiento(entrenamiento.id)}
+                    className="boton-secundario boton--compacto entrenamiento__accion"
+                  >
                     Ver entrenamiento
                   </Link>
                 ) : (

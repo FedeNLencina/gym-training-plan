@@ -198,9 +198,9 @@ export default function AdminEntrenamientos(): ReactElement {
               {entrenamientos.map((e) => (
                 <tr key={e.id}>
                   <th scope="row">{e.titulo}</th>
-                  <td><EtiquetaNivel nivel={e.nivel} /></td>
-                  <td>{e.duracionMin} min</td>
-                  <td>{e.video.tipo === 'enlace' ? 'Enlace' : e.video.nombreArchivo}</td>
+                  <td data-etiqueta="Categoría"><EtiquetaNivel nivel={e.nivel} /></td>
+                  <td data-etiqueta="Duración">{e.duracionMin} min</td>
+                  <td data-etiqueta="Video">{e.video.tipo === 'enlace' ? 'Enlace' : e.video.nombreArchivo}</td>
                   <td className="tabla__acciones">
                     <button type="button" className="boton-secundario boton--compacto"
                       onClick={() => abrir(aFormulario(e))}>Editar</button>

@@ -1,3 +1,4 @@
+import { Check } from 'lucide-react';
 import type { ReactElement, ReactNode } from 'react';
 
 import type { Plan } from '../dominio/modelos';
@@ -25,7 +26,10 @@ export default function TarjetaPlan({ plan, destacada = false, children }: Propi
       <p className="plan__descripcion">{plan.descripcion}</p>
       <ul className="plan__beneficios">
         {plan.beneficios.map((beneficio) => (
-          <li key={beneficio}>{beneficio}</li>
+          <li key={beneficio}>
+            <Check size={16} strokeWidth={3} aria-hidden="true" />
+            {beneficio}
+          </li>
         ))}
       </ul>
       {children !== undefined && <div className="plan__pie">{children}</div>}

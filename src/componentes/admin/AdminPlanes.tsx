@@ -116,8 +116,8 @@ export default function AdminPlanes(): ReactElement {
               {ordenarPorPrecio(planes).map((plan) => (
                 <tr key={plan.id}>
                   <th scope="row">{plan.nombre}</th>
-                  <td>{formatearPrecio(plan.precio)}</td>
-                  <td><EtiquetaNivel nivel={plan.nivel} /></td>
+                  <td data-etiqueta="Precio">{formatearPrecio(plan.precio)}</td>
+                  <td data-etiqueta="Nivel"><EtiquetaNivel nivel={plan.nivel} /></td>
                   <td className="tabla__acciones">
                     <button type="button" className="boton-secundario boton--compacto"
                       onClick={() => abrir(aFormulario(plan))}>Editar</button>
