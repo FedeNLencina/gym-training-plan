@@ -1,5 +1,5 @@
 ---
-inclusion: always
+inclusion: manual
 ---
 
 # Sistema de Diseño y Paleta de Colores (Atlas Gym Theme Oficial)
