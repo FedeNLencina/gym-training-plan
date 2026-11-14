@@ -443,6 +443,15 @@
   top: 0;
   z-index: 10;
   border-bottom: 1px solid var(--border-subtle);
+}
+
+/* El vidrio va en un pseudoelemento: si el desenfoque estuviera en .barra,
+   el panel y el velo (position: fixed) quedarían encerrados en la barra. */
+.barra::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   background-color: var(--bg-glass);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
@@ -450,7 +459,6 @@
 
 .barra__interior {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: var(--espacio-sm) var(--espacio-lg);
@@ -477,13 +485,109 @@
   color: var(--primary);
 }
 
-/* En pantallas angostas la navegación baja a una segunda fila desplazable. */
 .barra__nav {
   display: flex;
-  order: 3;
-  width: 100%;
-  gap: var(--espacio-md);
-  overflow-x: auto;
+  gap: var(--espacio-lg);
+}
+
+/* En escritorio el panel no existe como caja: sus hijos son parte de la barra. */
+.barra__panel {
+  display: contents;
+}
+
+.barra__hamburguesa,
+.barra__cerrar,
+.barra__velo {
+  display: none;
+}
+
+/* En pantallas angostas la navegación y la cuenta viven en un panel que entra
+   desde la derecha, sobre un velo que opaca la página. */
+@media (max-width: 767px) {
+  .barra__hamburguesa,
+  .barra__cerrar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radio-sm);
+    color: var(--text-main);
+  }
+
+  .barra__cerrar {
+    align-self: flex-end;
+  }
+
+  .barra__velo {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background-color: color-mix(in srgb, var(--bg-main) 72%, transparent);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 280ms ease, visibility 0s 280ms;
+  }
+
+  .barra__velo--visible {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 280ms ease, visibility 0s;
+  }
+
+  .barra__panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espacio-lg);
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: min(20rem, 86vw);
+    height: 100vh;
+    height: 100dvh;
+    padding: var(--espacio-sm) var(--espacio-md) var(--espacio-lg);
+    overflow-y: auto;
+    border-left: 1px solid var(--border-subtle);
+    background-color: var(--bg-surface);
+    transform: translateX(100%);
+    visibility: hidden;
+    transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1), visibility 0s 320ms;
+  }
+
+  .barra__panel--abierto {
+    transform: none;
+    visibility: visible;
+    transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1), visibility 0s;
+  }
+
+  .barra__panel .barra__nav {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .barra__panel .barra__enlace {
+    padding-block: var(--espacio-sm);
+    border-bottom: 1px solid var(--border-subtle);
+    font-family: var(--fuente-display);
+    font-size: 1.25rem;
+  }
+
+  .barra__panel .barra__enlace.active {
+    border-bottom-color: var(--primary);
+  }
+
+  .barra__panel .barra__cuenta {
+    flex-direction: column;
+    align-items: stretch;
+    margin-top: auto;
+  }
+
+  .barra__panel .barra__nombre {
+    max-width: none;
+  }
+
+  html.menu-abierto,
+  html.menu-abierto body {
+    overflow: hidden;
+  }
 }
 
 .barra__enlace {
@@ -520,14 +624,6 @@
   white-space: nowrap;
 }
 
-@media (min-width: 768px) {
-  .barra__nav {
-    order: 0;
-    width: auto;
-    gap: var(--espacio-lg);
-  }
-}
-
 /* ---------- Pie de página ---------- */
 
 .pie {
@@ -539,13 +635,16 @@
 .pie__interior {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: var(--espacio-lg);
   padding-block: var(--espacio-xl);
+  text-align: center;
 }
 
 .pie__nav {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: var(--espacio-lg);
 }
 
@@ -566,15 +665,25 @@
 @media (min-width: 768px) {
   .pie__interior {
     flex-direction: row;
-    align-items: center;
     justify-content: space-between;
+    text-align: start;
   }
 }
 
 /* ---------- Secciones ---------- */
 
+/* El contenido se compone sobre el eje central. Los bloques de lectura o de
+   datos (fichas de plan, preguntas, tablas, formularios) vuelven a alinear a
+   la izquierda por dentro, pero se ubican centrados. */
 .seccion {
   padding-block: var(--espacio-xl);
+  text-align: center;
+}
+
+.plan,
+.preguntas,
+.formulario {
+  text-align: start;
 }
 
 .seccion > h1,
@@ -589,6 +698,7 @@
 
 .seccion__bajada {
   max-width: 60ch;
+  margin-inline: auto;
   margin-bottom: var(--espacio-lg);
   color: var(--text-muted);
 }
@@ -612,24 +722,26 @@
 
 .hero {
   border-bottom: 1px solid var(--border-subtle);
-  background: radial-gradient(120% 90% at 100% 100%, var(--primary-deep) 0%, var(--bg-main) 60%);
+  background: radial-gradient(90% 80% at 50% 100%, var(--primary-deep) 0%, var(--bg-main) 65%);
 }
 
 .hero__interior {
   display: grid;
   gap: var(--espacio-xl);
-  padding-block: var(--espacio-xl);
+  padding-block: var(--espacio-xl) 0;
+  text-align: center;
 }
 
 .hero__titulo {
   max-width: 14ch;
+  margin-inline: auto;
   font-size: clamp(2.5rem, 9vw, 5.5rem);
   line-height: 0.95;
 }
 
 .hero__bajada {
   max-width: 46ch;
-  margin-top: var(--espacio-lg);
+  margin: var(--espacio-lg) auto 0;
   color: var(--text-muted);
   font-size: 1.125rem;
 }
@@ -637,6 +749,7 @@
 .hero__acciones {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: var(--espacio-md);
   margin-top: var(--espacio-lg);
 }
@@ -648,7 +761,11 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: end;
   gap: var(--espacio-sm);
+  width: 100%;
+  max-width: 40rem;
+  margin-inline: auto;
   height: 15rem;
+  text-align: start;
   /* Los escalones suben desde abajo del piso al cargar la página. */
   overflow: hidden;
 }
@@ -730,17 +847,12 @@
 
 @media (min-width: 768px) {
   .hero__interior {
-    grid-template-columns: 3fr 2fr;
-    align-items: end;
+    gap: var(--espacio-2xl);
     padding-block: var(--espacio-2xl) 0;
   }
 
-  .hero__texto {
-    padding-bottom: var(--espacio-2xl);
-  }
-
   .escalera {
-    height: 22rem;
+    height: 18rem;
   }
 
   .escalera__enlace {
@@ -938,6 +1050,7 @@
 
 .preguntas {
   max-width: 48rem;
+  margin-inline: auto;
   border-top: 1px solid var(--border-subtle);
 }
 
@@ -988,6 +1101,7 @@
 .filtros {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: var(--espacio-sm);
   margin-block: var(--espacio-lg);
 }
@@ -1019,6 +1133,7 @@
 
 .entrenamiento {
   display: grid;
+  justify-items: center;
   gap: var(--espacio-sm);
   padding-block: var(--espacio-lg);
   border-bottom: 1px solid var(--border-subtle);
@@ -1028,6 +1143,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   gap: var(--espacio-md);
 }
 
@@ -1047,7 +1163,7 @@
 
 .entrenamiento__descripcion {
   max-width: 65ch;
-  margin-top: var(--espacio-xs);
+  margin: var(--espacio-xs) auto 0;
   color: var(--text-muted);
 }
 
@@ -1055,14 +1171,11 @@
   color: var(--text-muted);
 }
 
-.entrenamiento__accion {
-  justify-self: start;
-}
-
 .entrenamiento__bloqueo {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   gap: var(--espacio-xs);
   color: var(--text-muted);
   font-size: 0.875rem;
@@ -1076,7 +1189,13 @@
   .entrenamiento {
     grid-template-columns: 9rem 1fr 15rem;
     align-items: center;
+    justify-items: stretch;
     gap: var(--espacio-lg);
+    text-align: start;
+  }
+
+  .entrenamiento__descripcion {
+    margin-inline: 0;
   }
 
   .entrenamiento > .entrenamiento__meta {
@@ -1100,7 +1219,7 @@
 .detalle {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: var(--espacio-md);
 }
 
@@ -1144,6 +1263,7 @@
 
 .pestanias {
   display: flex;
+  justify-content: safe center;
   gap: var(--espacio-lg);
   overflow-x: auto;
   border-bottom: 1px solid var(--border-subtle);
@@ -1314,6 +1434,7 @@ td.tabla__acciones > * + * {
 
 .formulario {
   max-width: 36rem;
+  margin-inline: auto;
 }
 
 .formulario--ancho {
