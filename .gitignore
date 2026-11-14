@@ -1,3 +1,6 @@
 node_modules
 dist
+test-results
+playwright-report
+.playwright-mcp
 .claude/skills/impeccable/scripts/bin/
